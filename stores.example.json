@@ -1,0 +1,12 @@
+{
+  "myshop": {
+    "baseUrl": "https://myshop.com.ua",
+    "login": "api",
+    "password": "REPLACE_ME"
+  },
+  "othershop": {
+    "baseUrl": "https://othershop.ua",
+    "login": "api",
+    "password": "REPLACE_ME"
+  }
+}

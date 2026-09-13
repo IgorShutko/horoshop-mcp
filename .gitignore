@@ -1,0 +1,14 @@
+node_modules/
+dist/
+*.log
+
+# Store credentials: never commit real ones. Backups count too.
+stores.json
+stores*.json
+stores.json.*
+!stores.example.json
+*.bak
+*.bak-*
+*.bak.*
+.env
+.env.*

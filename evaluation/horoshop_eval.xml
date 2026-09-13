@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Evaluation set for horoshop-mcp.
+
+  Each question is read-only, requires several tool calls, and has a single
+  stable answer. Answers below are PLACEHOLDERS: they depend on the specific
+  store connected, so fill each <answer> by running the question against a
+  configured store (set `store` accordingly), then verify by hand. Do not ship
+  fabricated answers — an unverified eval is worse than none.
+
+  Method hints show the intended tool path for each question.
+-->
+<evaluation>
+  <qa_pair>
+    <!-- method: currency_export -->
+    <question>For the store, how many currencies are enabled on the front end, and what is the exchange rate from UAH to USD?</question>
+    <answer>TODO: verify against a configured store</answer>
+  </qa_pair>
+  <qa_pair>
+    <!-- method: payment_export to find the id of "Оплата при получении"/"Післяплата", then delivery_export to count options whose payment[] contains it -->
+    <question>How many delivery options permit cash-on-delivery payment?</question>
+    <answer>TODO: verify against a configured store</answer>
+  </qa_pair>
+  <qa_pair>
+    <!-- method: orders_get_statuses -->
+    <question>How many order statuses are configured, and which status id is marked is_successful?</question>
+    <answer>TODO: verify against a configured store</answer>
+  </qa_pair>
+  <qa_pair>
+    <!-- method: payment_methods, count where is_simple is false/0 -->
+    <question>How many payment methods redirect the buyer to a payment gateway (is_simple = false)?</question>
+    <answer>TODO: verify against a configured store</answer>
+  </qa_pair>
+  <qa_pair>
+    <!-- method: icons_export, count enabled == 1 -->
+    <question>How many product stickers/icons are currently enabled?</question>
+    <answer>TODO: verify against a configured store</answer>
+  </qa_pair>
+  <qa_pair>
+    <!-- method: pages_export(parent 0) then catalog_export per category with limit, compare counts -->
+    <question>Which top-level catalog category contains the most products?</question>
+    <answer>TODO: verify against a configured store</answer>
+  </qa_pair>
+  <qa_pair>
+    <!-- method: catalog_export with expr.article + includedParams ["price","presence"] -->
+    <question>For article &lt;ARTICLE&gt;, what is the current price and availability (presence) status?</question>
+    <answer>TODO: verify against a configured store</answer>
+  </qa_pair>
+  <qa_pair>
+    <!-- method: customer_groups_export, count dropshipping == true -->
+    <question>How many B2B customer groups have dropshipping enabled?</question>
+    <answer>TODO: verify against a configured store</answer>
+  </qa_pair>
+  <qa_pair>
+    <!-- method: orders_get with from/to + status filter, count -->
+    <question>How many orders reached the "delivered" status between &lt;FROM&gt; and &lt;TO&gt;?</question>
+    <answer>TODO: verify against a configured store</answer>
+  </qa_pair>
+  <qa_pair>
+    <!-- method: orders_get with from/to, sum total_sum where payed == 1 -->
+    <question>What is the total value (sum of total_sum) of paid orders between &lt;FROM&gt; and &lt;TO&gt;?</question>
+    <answer>TODO: verify against a configured store</answer>
+  </qa_pair>
+</evaluation>

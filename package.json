@@ -1,0 +1,54 @@
+{
+  "name": "horoshop-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for the Horoshop e-commerce platform: public API, admin panel and storefront cart. One server, many stores.",
+  "type": "module",
+  "bin": {
+    "horoshop-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "start": "node dist/index.js",
+    "inspect": "npm run build && npx @modelcontextprotocol/inspector node dist/index.js",
+    "docs:tools": "npm run build && node scripts/tools-doc.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IgorShutko/horoshop-mcp.git"
+  },
+  "homepage": "https://github.com/IgorShutko/horoshop-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/IgorShutko/horoshop-mcp/issues"
+  },
+  "author": "Igor Shutko",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "modelcontextprotocol",
+    "model-context-protocol",
+    "horoshop",
+    "ecommerce",
+    "ukraine",
+    "claude",
+    "cursor",
+    "codex"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.13.0",
+    "node-html-parser": "^7.1.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.6.3"
+  }
+}
