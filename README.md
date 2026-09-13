@@ -1,35 +1,39 @@
-# horoshop-mcp
+# Хорошоп MCP: неофіційний MCP-сервер для магазинів на Хорошопі
 
-An [MCP](https://modelcontextprotocol.io/) server for [Horoshop](https://horoshop.ua/), the Ukrainian e-commerce platform. It lets Claude, Cursor, Codex, Hermes Agent and any other MCP client work with your stores: read and update the catalog, process orders, manage SEO, redirects, marketplace feeds, design, settings and more.
+**Українська** · [Русский](README.ru.md) · [English](README.en.md)
 
-- **118 tools** across three layers: the public Horoshop API, the control panel behind it, and the storefront cart.
-- **Many stores, one server.** Every tool takes a `store` argument, so an agency can work with all client shops through a single connection.
-- **Safe by default.** 57 of the 71 write tools only preview their changes until you pass `dryRun:false`; risky bulk operations demand explicit confirmations; writes are verified by reading the result back.
-- **Local.** The server runs on your machine over stdio. Credentials stay in a file you control.
+**Хорошоп MCP** (`horoshop-mcp`): безкоштовний [MCP](https://modelcontextprotocol.io/)-сервер з відкритим кодом, який підключає ШІ-агентів Claude, Cursor, Codex, Hermes Agent та інших до інтернет-магазину на платформі [Хорошоп](https://horoshop.ua/). Сервер працює на вашому комп'ютері, обслуговує кілька магазинів одночасно і дає агенту 118 інструментів для каталогу, замовлень, SEO, редиректів, фідів маркетплейсів, дизайну та налаштувань магазину.
 
-> Not affiliated with Horoshop. The admin-panel tools use internal, undocumented endpoints of the control panel, which Horoshop may change without notice. Try new workflows on a test store before running them on a live one.
+> **Неофіційний проєкт.** Хорошоп MCP не є продуктом компанії Хорошоп, не пов'язаний з нею і нею не підтримується. Інструменти адмінки працюють через внутрішні недокументовані запити, які Хорошоп може змінити без попередження. Нові сценарії спершу перевіряйте на тестовому магазині і лише потім запускайте на робочому.
 
-## Contents
+- **118 інструментів** на трьох рівнях: публічний API Хорошопу, адмінка та кошик вітрини.
+- **Багато магазинів, один сервер.** Кожен інструмент приймає аргумент `store`, тож агенція може працювати з магазинами всіх клієнтів через одне підключення.
+- **Безпечно за замовчуванням.** 57 з 71 інструмента запису лише показують план змін, доки ви не передасте `dryRun:false`; ризиковані масові операції вимагають явного підтвердження; кожен запис перевіряється повторним читанням результату.
+- **Локально.** Сервер працює на вашому комп'ютері через stdio. Доступи лежать у файлі, який контролюєте ви.
 
-- [Quick start](#quick-start)
-- [What it can do](#what-it-can-do)
-- [Configuration](#configuration)
-- [How writes are protected](#how-writes-are-protected)
-- [Known limitations](#known-limitations)
-- [Security](#security)
-- [How it works](#how-it-works)
-- [Development](#development)
-- [License](#license)
+## Зміст
 
-Documentation: [docs/INSTALL.md](docs/INSTALL.md) (setup for 22 clients) · [docs/TOOLS.md](docs/TOOLS.md) (every tool and parameter) · [docs/INTERNALS.md](docs/INTERNALS.md) (architecture and platform notes).
+- [Швидкий старт](#швидкий-старт)
+- [Можливості](#можливості)
+- [Налаштування](#налаштування)
+- [Захист від помилкових змін](#захист-від-помилкових-змін)
+- [Обмеження платформи](#обмеження-платформи)
+- [Безпека](#безпека)
+- [Як це працює](#як-це-працює)
+- [Часті запитання](#часті-запитання)
+- [Розробка](#розробка)
+- [Автор і контакти](#автор-і-контакти)
+- [Ліцензія](#ліцензія)
 
-## Quick start
+Документація: [інструкція з встановлення](docs/INSTALL.uk.md) для 22 клієнтів · [довідник інструментів](docs/TOOLS.md) з усіма параметрами (англійською) · [внутрішній устрій](docs/INTERNALS.md) та особливості платформи (англійською).
 
-**1. Requirements.** Node.js 18 or newer and Git.
+## Швидкий старт
 
-**2. Credentials.** Create an admin user in your store's control panel (**Settings → Admins → Add**) and note its login and password. The same pair works for the API and for the admin-panel tools. Details: [Get Horoshop credentials](docs/INSTALL.md#1-get-horoshop-credentials).
+**1. Що потрібно.** Node.js 18 або новіший і Git.
 
-**3. stores.json.** Save it somewhere private:
+**2. Доступи.** Створіть в адмінці магазину окремого адміністратора (у російському інтерфейсі розділ «Настройки → Админы», кнопка «Добавить») і збережіть його логін і пароль. Та сама пара працює і для API, і для інструментів адмінки. Детальніше: [як отримати доступи Хорошопу](docs/INSTALL.uk.md#1-отримайте-доступи-хорошопу).
+
+**3. stores.json.** Збережіть файл у місці, куди не мають доступу сторонні:
 
 ```json
 {
@@ -37,7 +41,7 @@ Documentation: [docs/INSTALL.md](docs/INSTALL.md) (setup for 22 clients) · [doc
 }
 ```
 
-**4. Connect your client.** No clone needed: the client starts the server with `npx`.
+**4. Підключіть ШІ-клієнт.** Клонувати репозиторій не потрібно: клієнт сам запускає сервер через `npx`.
 
 Claude Code:
 
@@ -51,7 +55,7 @@ Codex:
 codex mcp add horoshop --env HOROSHOP_STORES_FILE=/abs/path/to/stores.json -- npx -y github:IgorShutko/horoshop-mcp
 ```
 
-Cursor (`~/.cursor/mcp.json`), Claude Desktop (`claude_desktop_config.json`), Windsurf, LM Studio, Kiro and most other clients:
+Cursor (`~/.cursor/mcp.json`), Claude Desktop (`claude_desktop_config.json`), Windsurf, LM Studio, Kiro і більшість інших клієнтів:
 
 ```json
 {
@@ -65,55 +69,55 @@ Cursor (`~/.cursor/mcp.json`), Claude Desktop (`claude_desktop_config.json`), Wi
 }
 ```
 
-On Windows use `"command": "cmd", "args": ["/c", "npx", "-y", "github:IgorShutko/horoshop-mcp"]`. The first start downloads and builds the package, which takes about 20 seconds. VS Code, Zed, Hermes Agent, Gemini CLI, OpenCode, Goose and the rest have their own formats: see [docs/INSTALL.md](docs/INSTALL.md), which also covers a regular clone-and-build install and client timeouts.
+У Windows використовуйте `"command": "cmd", "args": ["/c", "npx", "-y", "github:IgorShutko/horoshop-mcp"]`. Перший запуск завантажує і збирає пакет, це займає близько 20 секунд. У VS Code, Zed, Hermes Agent, Gemini CLI, OpenCode, Goose та інших клієнтів свій формат налаштувань: дивіться [інструкцію з встановлення](docs/INSTALL.uk.md), там також описано встановлення через клонування і тайм-аути клієнтів.
 
-**5. Try it.** Ask your agent:
+**5. Спробуйте.** Попросіть агента:
 
-- *"List my Horoshop stores and check that authentication works."*
-- *"Show the 10 newest orders in myshop with status and total."*
-- *"Which products in myshop are out of stock? Show article, title and price."*
-- *"Set the SEO title and description of the /shoes/ category in Ukrainian and Russian. Preview only."*
-- *"Create 301 redirects from this list of old URLs. Dry run first."*
+- *«Покажи мої магазини на Хорошопі та перевір, чи працює авторизація.»*
+- *«Покажи 10 найновіших замовлень у myshop зі статусом і сумою.»*
+- *«Яких товарів у myshop немає в наявності? Покажи артикул, назву і ціну.»*
+- *«Задай SEO-заголовок і опис категорії /shoes/ українською та російською. Лише план змін.»*
+- *«Створи 301-редиректи з цього списку старих URL. Спершу покажи план змін.»*
 
-## What it can do
+## Можливості
 
-| Area | Tools | Examples |
+| Напрям | Інструментів | Приклади |
 |---|---|---|
-| Setup and diagnostics | 2 | list configured stores, check API authentication |
-| Catalog (public API) | 4 | export and import products, attach images, list stickers |
-| Orders (public API) | 3 | read orders with UTM and delivery data, update status and payment, list statuses |
-| Categories, users, product sets | 5 | category tree, export and import customers, "bought together" sets |
-| Payment, delivery, currency | 5 | payment and delivery options, exchange rates |
-| B2B and webhooks | 4 | customer groups, price levels, event subscriptions |
-| Storefront | 6 | drive a real buyer cart, apply a coupon, inspect what checkout offers |
-| Admin: generic engine | 6 | read, save or delete any record of any control-panel entity |
-| Admin: orders and analytics | 8 | read and edit orders, cancel or delete them, resolve order numbers, print waybills, sales dashboard |
-| Admin: products, prices, images | 9 | bulk price changes with rollback, group edits and merges, warehouse stock, supplier price-list import, image import by file name |
-| Admin: characteristics and dictionaries | 15 | category characteristic schemas, product templates, attribute dictionaries and their translations |
-| Admin: categories, pages, blog, banners, filters | 12 | categories and info pages with SEO texts, blog articles, banners, indexable filter landings |
-| Admin: SEO, sitemap, redirects | 11 | pagination canonical and noindex settings, robots.txt, sitemap, 301 redirects with loop and duplicate checks |
-| Admin: marketplace feeds | 6 | Rozetka, Hotline, Google, Facebook and Kasta feeds: switch, map, regenerate, verify |
-| Admin: design and localization | 8 | theme settings, custom CSS, languages, interface translations |
-| Admin: store settings, marketing, fiscal receipts | 14 | contacts and store info, checkout options, tracking codes (GTM, Pixel, GA4), coupons, Checkbox receipts |
+| Налаштування і діагностика | 2 | список підключених магазинів, перевірка авторизації в API |
+| Каталог (публічний API) | 4 | експорт та імпорт товарів, прив'язка фото, список стікерів |
+| Замовлення (публічний API) | 3 | замовлення з UTM і даними доставки, зміна статусу та оплати, список статусів |
+| Категорії, покупці, комплекти | 5 | дерево категорій, експорт та імпорт покупців, комплекти «купують разом» |
+| Оплата, доставка, валюти | 5 | способи оплати та доставки, курси валют |
+| B2B і вебхуки | 4 | групи покупців, рівні цін, підписки на події |
+| Вітрина | 6 | справжній кошик покупця, застосування купона, перевірка варіантів на оформленні замовлення |
+| Адмінка: універсальний рушій | 6 | читання, збереження або видалення будь-якого запису будь-якого розділу адмінки |
+| Адмінка: замовлення та аналітика | 8 | читання і редагування замовлень, скасування чи видалення, пошук за номером, друк ТТН, дашборд продажів |
+| Адмінка: товари, ціни, фото | 9 | масова зміна цін з відкатом, групове редагування та об'єднання, складські залишки, імпорт прайсу постачальника, імпорт фото за назвою файлу |
+| Адмінка: характеристики та довідники | 15 | схеми характеристик категорій, шаблони товарів, довідники значень та їх переклади |
+| Адмінка: категорії, сторінки, блог, банери, фільтри | 12 | категорії та інфосторінки з SEO-текстами, статті блогу, банери, індексовані сторінки фільтрів |
+| Адмінка: SEO, sitemap, редиректи | 11 | canonical і noindex для пагінації, robots.txt, sitemap, 301-редиректи з перевіркою циклів і дублів |
+| Адмінка: фіди маркетплейсів | 6 | фіди Rozetka, Hotline, Google, Facebook і Kasta: увімкнення, зіставлення, генерація, перевірка |
+| Адмінка: дизайн та мови | 8 | налаштування теми, власний CSS, мови, переклади інтерфейсу |
+| Адмінка: налаштування, маркетинг, фіскальні чеки | 14 | контакти й інформація про магазин, способи оформлення, коди відстеження (GTM, Pixel, GA4), купони, чеки Checkbox |
 
-Every tool, its access level and all parameters: [docs/TOOLS.md](docs/TOOLS.md).
+Кожен інструмент, його рівень доступу та всі параметри: [довідник інструментів](docs/TOOLS.md) (англійською).
 
-## Configuration
+## Налаштування
 
-The server reads everything from environment variables.
+Сервер бере всі параметри зі змінних середовища.
 
-| Variable | Default | Purpose |
+| Змінна | За замовчуванням | Призначення |
 |---|---|---|
-| `HOROSHOP_STORES_FILE` | none | Path to the stores JSON file (recommended). |
-| `HOROSHOP_STORES` | none | The same JSON inline. Takes priority over the file. |
-| `HOROSHOP_DEFAULT_STORE` | the only store, if there is one | Store used when a call omits `store`. |
-| `HOROSHOP_TIMEOUT_MS` | `120000` | Timeout for one HTTP request to a store. |
-| `HOROSHOP_MAX_RESPONSE_BYTES` | `100000` | Read answers larger than this are held back with a hint on how to narrow them. `HOROSHOP_EXPORT_MAX_BYTES` is accepted as an alias. |
-| `HOROSHOP_WIDGET_RETRY` | on | `off` disables the automatic retry of idempotent control-panel widget writes (see [Known limitations](#known-limitations)). |
-| `HOROSHOP_GRID_REPAIR_MAX` | computed per list, at most 60 | Extra page reads allowed when a long admin list shifts while being read. |
-| `HOROSHOP_IMPORT_POST_LIMIT` | `120000` | Maximum bytes per `catalog/import` request; bigger imports are split automatically. |
+| `HOROSHOP_STORES_FILE` | немає | Шлях до JSON-файлу з магазинами (рекомендований спосіб). |
+| `HOROSHOP_STORES` | немає | Той самий JSON прямо в змінній. Має пріоритет над файлом. |
+| `HOROSHOP_DEFAULT_STORE` | єдиний магазин, якщо він один | Магазин для викликів без `store`. |
+| `HOROSHOP_TIMEOUT_MS` | `120000` | Тайм-аут одного HTTP-запиту до магазину. |
+| `HOROSHOP_MAX_RESPONSE_BYTES` | `100000` | Відповіді інструментів читання, більші за цей розмір, не повертаються: сервер натомість підказує, як звузити запит. Також приймається стара назва `HOROSHOP_EXPORT_MAX_BYTES`. |
+| `HOROSHOP_WIDGET_RETRY` | увімкнено | `off` вимикає автоматичний повтор ідемпотентних записів через віджети адмінки (див. [обмеження платформи](#обмеження-платформи)). |
+| `HOROSHOP_GRID_REPAIR_MAX` | розраховується для кожного списку, не більше 60 | Скільки додаткових сторінок можна перечитати, якщо довгий список в адмінці зсувається під час читання. |
+| `HOROSHOP_IMPORT_POST_LIMIT` | `120000` | Максимум байтів в одному запиті `catalog/import`; більші імпорти діляться автоматично. |
 
-Stores file format:
+Формат файлу з магазинами:
 
 ```json
 {
@@ -122,52 +126,82 @@ Stores file format:
 }
 ```
 
-The key is the name used as `store`. `baseUrl` may be a bare domain and may end with a slash or `/api`. A missing configuration is not fatal: the server still starts and lists its tools, and calls explain what is missing. A malformed file stops the server with a clear message.
+Ключ задає назву, яку потім передають як `store`. `baseUrl` може бути просто доменом, зі слешем у кінці або з `/api`. Якщо конфігурації немає, сервер усе одно запускається і показує інструменти, а виклики пояснюють, чого бракує. Файл з помилкою зупиняє сервер зі зрозумілим повідомленням.
 
-## How writes are protected
+## Захист від помилкових змін
 
-- **Preview first.** 57 of the 71 write tools run with `dryRun` on by default and return a plan: what will change, from what, to what. Nothing is written until you repeat the call with `dryRun:false`.
-- **Confirmations for irreversible or bulk actions.** Deleting or cancelling orders, deleting dictionaries, changing a feed alias (it is the public feed URL) and running a price import each need an explicit `confirm`. `horoshop_admin_products_price_set` refuses zero or negative prices, requires the exact product count above 50 products and an acknowledgement for changes above 50%, and returns a ready rollback payload.
-- **Read-back verification.** Writers re-read what they wrote, often through a second channel (for example, an admin-panel write checked through the public API), because Horoshop sometimes answers `OK` without saving anything.
-- **Template guard.** Storefront texts often contain placeholders like `{DISCOUNT_PERCENT}` or `{site}`. Writers refuse to replace them with plain text unless you pass `allowPlaceholderLoss:true`.
-- **Size gate.** Read tools measure their answer and hold back anything over 100 KB with a precise hint, so one call cannot flood the conversation.
-- **Secrets stay hidden.** `horoshop_admin_design_get` withholds the payment section and masks key-like values; `horoshop_list_stores` never returns credentials.
-- **Tool annotations.** Every tool is marked read-only, write or destructive, so clients that support it can auto-approve reads and ask before writes.
+- **Спершу план.** 57 з 71 інструмента запису за замовчуванням працюють з `dryRun` і повертають план: що зміниться, з якого значення і на яке. Нічого не записується, доки ви не повторите виклик з `dryRun:false`.
+- **Підтвердження для незворотних і масових дій.** Видалення або скасування замовлень, видалення довідників, зміна аліасу фіду (це публічна адреса фіду) та запуск імпорту прайсу вимагають явного `confirm`. `horoshop_admin_products_price_set` не приймає нульову чи від'ємну ціну, для понад 50 товарів вимагає точну кількість товарів, для змін понад 50% окреме підтвердження, і повертає готові параметри для відкату.
+- **Перевірка читанням.** Інструменти запису перечитують результат, часто іншим каналом (наприклад, запис через адмінку перевіряється через публічний API), бо Хорошоп інколи відповідає `OK`, нічого не зберігши.
+- **Захист шаблонів.** Тексти вітрини часто містять змінні на кшталт `{DISCOUNT_PERCENT}` чи `{site}`. Інструменти запису не замінять їх звичайним текстом без `allowPlaceholderLoss:true`.
+- **Обмеження розміру.** Інструменти читання вимірюють відповідь і не повертають понад 100 KB, а підказують, як звузити запит. Один виклик не засмітить розмову.
+- **Секрети приховані.** `horoshop_admin_design_get` не віддає розділ оплати і маскує значення, схожі на ключі; `horoshop_list_stores` ніколи не повертає доступи.
+- **Анотації інструментів.** Кожен інструмент позначений як читання, запис або руйнівний запис, тож клієнти, які це підтримують, можуть автоматично дозволяти читання і питати дозволу перед записом.
 
-## Known limitations
+## Обмеження платформи
 
-These come from the platform, not from the server, and were measured on live stores:
+Ці обмеження йдуть від платформи, а не від сервера, і виміряні на реальних магазинах:
 
-- **Import, no delete, in the public API.** Products and users can be created or updated but not deleted through `/api/`; categories are read-only there. The admin-panel tools cover deletion and category editing.
-- **Catalog export returns at most 500 products per call,** whatever `limit` says. Page through with `offset` and `limit` (100 per page works well).
-- **Order line items cannot be edited,** neither through the API nor through the control panel. Recipient, address, payment and manager comment can.
-- **Single photos cannot be removed from a gallery.** Horoshop exposes no route for it.
-- **Control-panel widget writes are occasionally lost.** During bursts some requests reach the storefront instead of the admin and nothing is saved. Idempotent writes (update, delete) are retried up to five times and misses are reported; creation is never retried, to avoid duplicates.
-- **Opening an order in the control panel moves it to the top of the admin order list** (the platform stamps the row's date). Order data is not changed; the tools open editors as rarely as possible.
-- **The analytics dashboard covers a fixed period.** For arbitrary date ranges aggregate `horoshop_orders_get`.
-- **Some sections exist only when the store has the module,** for example the custom CSS editor. `horoshop_admin_css_get` then reports `available:false` instead of an empty result.
+- **У публічному API є імпорт, але немає видалення.** Товари та покупців через `/api/` можна створювати й оновлювати, але не видаляти; категорії там доступні лише для читання. Видалення і редагування категорій закривають інструменти адмінки.
+- **Експорт каталогу віддає не більше 500 товарів за виклик,** незалежно від `limit`. Гортайте через `offset` і `limit` (100 на сторінку працює добре).
+- **Товари в замовленні змінити не можна** ні через API, ні через адмінку. Одержувача, адресу, оплату й коментар менеджера змінити можна.
+- **Окреме фото з галереї видалити не можна.** Хорошоп не має такого маршруту.
+- **Записи через віджети адмінки інколи губляться.** Під час сплесків навантаження частина запитів потрапляє на вітрину замість адмінки, і нічого не зберігається. Ідемпотентні записи (оновлення, видалення) повторюються до п'яти разів, а пропуски потрапляють у звіт; створення не повторюється ніколи, щоб не з'явилися дублікати.
+- **Відкриття замовлення в адмінці піднімає його на верх списку замовлень** (платформа оновлює дату рядка). Дані замовлення не змінюються; інструменти відкривають редактор якомога рідше.
+- **Дашборд аналітики показує фіксований період.** Для довільних дат збирайте дані через `horoshop_orders_get`.
+- **Деякі розділи існують, лише якщо в магазині підключено модуль,** наприклад редактор власного CSS. Тоді `horoshop_admin_css_get` повертає `available:false` замість порожнього результату.
 
-The full list with details is in [docs/INTERNALS.md](docs/INTERNALS.md#platform-notes).
+Повний список з подробицями: [docs/INTERNALS.md](docs/INTERNALS.md#platform-notes) (англійською).
 
-## Security
+## Безпека
 
-- Keep credentials in the stores file or environment variables, never in prompts or tool arguments. `stores*.json`, backups and `.env` files are git-ignored.
-- Create a dedicated admin user for the server and give it the narrowest role that fits your work. Remove it to revoke access.
-- The server talks only to the stores you configure, to the Horoshop image-upload service that your control panel points to during image imports, and to image URLs you ask it to upload. There is no telemetry.
-- API tokens and control-panel sessions live in memory only.
-- When reporting a bug, do not paste real store data, order details or credentials into the issue.
+- Тримайте доступи у файлі магазинів або в змінних середовища, ніколи не вставляйте їх у запити до агента чи в аргументи інструментів. `stores*.json`, резервні копії та файли `.env` додані до gitignore.
+- Створіть для сервера окремого адміністратора з найвужчою роллю, якої достатньо для роботи. Щоб закрити доступ, видаліть цього користувача.
+- Сервер звертається лише до налаштованих магазинів, до сервісу завантаження зображень Хорошопу, на який вказує адмінка під час імпорту фото, і до адрес зображень, які ви самі просите завантажити. Телеметрії немає.
+- API-токени та сесії адмінки зберігаються лише в пам'яті.
+- Повідомляючи про помилку, не вставляйте в issue реальні дані магазину, замовлень чи доступи.
 
-## How it works
+## Як це працює
 
-The server combines three channels to a store:
+Сервер поєднує три канали до магазину:
 
-1. **Public API** (`/api/<function>/`): token authentication, cached per store and renewed transparently. Used for catalog, orders, users, reference data, B2B and webhooks.
-2. **Control panel**: a session from `/core-api/admin/security/login`, then the legacy admin screens. The admin is a uniform machine keyed on `handler` (entity type): lists, edit forms, save endpoints. A registry of these entity types lets a small generic core reach almost every section, with named tools for the common ones. Writes read the whole form, change only the requested fields and replay the rest, so untouched fields are preserved.
-3. **Storefront**: the shop's own cart widget (`/_widget/ajax_cart/`), for questions the API cannot answer, such as whether a buyer can actually reach checkout with a given delivery option.
+1. **Публічний API** (`/api/<function>/`): авторизація токеном, який кешується для кожного магазину й оновлюється непомітно. Використовується для каталогу, замовлень, покупців, довідкових даних, B2B і вебхуків.
+2. **Адмінка**: сесія через `/core-api/admin/security/login`, далі класичні екрани адмінки. Адмінка влаштована одноманітно і розрізняє розділи за параметром `handler` (тип сутності): списки, форми редагування, збереження. Реєстр цих типів дає невеликому універсальному ядру доступ майже до кожного розділу, а для частих задач є окремі інструменти. Запис читає всю форму, змінює лише потрібні поля і відправляє решту без змін, тож поля, яких ви не торкалися, зберігаються.
+3. **Вітрина**: власний віджет кошика магазину (`/_widget/ajax_cart/`) для питань, на які API не відповідає. Наприклад, чи зможе покупець дійти до оформлення замовлення з певним способом доставки.
 
-Architecture, project layout and platform notes: [docs/INTERNALS.md](docs/INTERNALS.md).
+Архітектура, структура проєкту та особливості платформи: [docs/INTERNALS.md](docs/INTERNALS.md) (англійською).
 
-## Development
+## Часті запитання
+
+### Що таке Хорошоп MCP?
+
+Хорошоп MCP реалізує протокол Model Context Protocol для інтернет-магазинів на Хорошопі. Підключений до нього ШІ-агент читає та змінює магазин через 118 інструментів: товари, замовлення, покупців, категорії, SEO-тексти, 301-редиректи, фіди маркетплейсів, дизайн і налаштування. Сервер з відкритим кодом працює локально й може обслуговувати кілька магазинів одночасно.
+
+### Чи є Хорошоп MCP офіційним продуктом Хорошопу?
+
+Ні. Хорошоп MCP розробляється незалежно і не пов'язаний з компанією Хорошоп. Сервер використовує публічний API Хорошопу, а все, чого в API немає, робить тими самими запитами, які надсилає інтерфейс адмінки. Ці внутрішні запити можуть змінитися будь-коли, тому нові сценарії перевіряйте на окремому тестовому магазині.
+
+### Які ШІ-асистенти працюють з Хорошоп MCP?
+
+Будь-який MCP-клієнт, який уміє запускати локальний stdio-сервер. В [інструкції з встановлення](docs/INSTALL.uk.md) є покрокове налаштування для 22 клієнтів, серед них Claude Code, Claude Desktop, Cursor, OpenAI Codex, Hermes Agent, VS Code з GitHub Copilot, Windsurf, Gemini CLI, Zed і Cline.
+
+### Що потрібно, щоб підключити магазин на Хорошопі?
+
+Node.js 18 або новіший, Git, а також логін і пароль адміністратора вашого магазину на Хорошопі. Запишіть доступи в `stores.json`, додайте сервер у ШІ-клієнт однією командою і зачекайте близько 20 секунд, поки перший запуск збере пакет.
+
+### Чи безпечно давати ШІ-агенту доступ до магазину?
+
+Сервер спроєктований саме для цього. 57 з 71 інструмента запису лише показують план, доки ви не передасте `dryRun:false`, незворотні дії вимагають явного `confirm`, а кожен запис перевіряється читанням результату. Доступи зберігаються в локальному файлі, телеметрії немає. Дайте серверу окремого адміністратора з найвужчою роллю, якої достатньо.
+
+### Чи можна керувати кількома магазинами з одного сервера?
+
+Так. Опишіть усі магазини в одному файлі `stores.json`, а кожен виклик обирає магазин аргументом `store`. Так агенція працює з магазинами всіх клієнтів через одне підключення.
+
+### Скільки коштує Хорошоп MCP?
+
+Хорошоп MCP безкоштовний і поширюється за ліцензією MIT. Платите лише за свій тариф Хорошопу і за ШІ-клієнт, яким користуєтеся.
+
+## Розробка
 
 ```bash
 git clone https://github.com/IgorShutko/horoshop-mcp.git
@@ -178,12 +212,21 @@ npm run inspect      # build and open the MCP Inspector
 npm run docs:tools   # regenerate docs/TOOLS.md from the running server
 ```
 
-MCP clients start the server once, so restart your client after rebuilding. `horoshop_check_auth` and `horoshop_list_stores` report `stale:true` when the build on disk is newer than the running process.
+MCP-клієнти запускають сервер один раз, тому після перезбирання перезапустіть клієнт. `horoshop_check_auth` і `horoshop_list_stores` повертають `stale:true`, якщо збірка на диску новіша за запущений процес.
 
-`evaluation/horoshop_eval.xml` holds a set of read-only questions for checking that a model can complete real tasks through the server. The answers depend on the connected store, so fill them in against your own test store.
+У `evaluation/horoshop_eval.xml` зібрано запитання лише на читання, щоб перевірити, чи справляється модель з реальними задачами через сервер. Відповіді залежать від підключеного магазину, тож заповнюйте їх на власному тестовому магазині.
 
-Issues and pull requests are welcome. Keep real store data out of issues, logs and test fixtures.
+Issues і pull requests вітаються. Не публікуйте реальні дані магазинів в issues, логах і тестових файлах.
 
-## License
+## Автор і контакти
 
-[MIT](LICENSE). Built by Igor Shutko at [Target+](https://www.targetplus-agency.com/).
+Хорошоп MCP створює та підтримує Ігор Шутко, агенція [Target+](https://www.targetplus-agency.com/).
+
+- Telegram: [@shutko_igor](https://t.me/shutko_igor)
+- Telegram-канал: [@shutko_ads](https://t.me/shutko_ads)
+
+Помилки та побажання: [GitHub Issues](https://github.com/IgorShutko/horoshop-mcp/issues).
+
+## Ліцензія
+
+[MIT](LICENSE).

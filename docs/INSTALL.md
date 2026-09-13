@@ -1,6 +1,8 @@
 # Install and connect
 
-horoshop-mcp is a local MCP server that talks over **stdio**. Any client that can start a local command and pass it environment variables can use it. This page covers credentials, the three ways to launch the server, and step-by-step setup for 22 clients.
+[Українська](INSTALL.uk.md) · [Русский](INSTALL.ru.md) · **English**
+
+Horoshop MCP (`horoshop-mcp`) is an unofficial MCP server for the Horoshop e-commerce platform, not affiliated with Horoshop. It runs locally and talks over **stdio**. Any client that can start a local command and pass it environment variables can use it. This page covers credentials, the three ways to launch the server, and step-by-step setup for 22 clients.
 
 ## Contents
 
@@ -41,7 +43,7 @@ One file can hold any number of stores. The key is the short name you (or the AI
 - Keep the file outside shared folders. On macOS and Linux run `chmod 600 stores.json`.
 - Instead of a file you can put the same JSON into the `HOROSHOP_STORES` environment variable. A file is safer: client configs get copied, synced and screenshotted.
 
-All environment variables are listed in the [README](../README.md#configuration).
+All environment variables are listed in the [README](../README.en.md#configuration).
 
 ## 3. Choose how to launch the server
 
