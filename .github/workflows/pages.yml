@@ -32,7 +32,7 @@ jobs:
           node-version: "22"
       # The page prints tool counts from docs/tools.json, so it is built, not committed.
       - run: node site/build.mjs
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site/_site
