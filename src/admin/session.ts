@@ -21,6 +21,7 @@ import {
   type RedirectTarget,
 } from "./form.js";
 import { withNetworkRetry } from "./retry.js";
+import { redactSecrets } from "./redact.js";
 import { BROWSER_UA } from "./ua.js";
 
 
@@ -337,14 +338,18 @@ export class AdminClient {
     }
   }
 
-  /** Who the cached/fresh session authenticates as (login, role). */
+  /**
+   * Who the cached/fresh session authenticates as (login, role). The payload also
+   * carries `auth_token` - the admin session's live JWT - so it is masked here:
+   * an answer that reaches the agent must never carry a usable credential.
+   */
   async whoAmI(store?: string): Promise<unknown> {
     const { name, conf } = this.resolve(store);
     const res = await this.fetchSession(name, conf, "/core-api/admin/security/logged_user", {
       headers: { Accept: "application/json" },
     });
     const body: any = await res.json().catch(() => ({}));
-    return body?.payload ?? body;
+    return redactSecrets(body?.payload ?? body);
   }
 
   /**

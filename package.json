@@ -1,5 +1,5 @@
 {
-  "name": "horoshop-mcp",
+  "name": "horoshop-mcp-server",
   "version": "0.1.0",
   "description": "Unofficial MCP server for Horoshop (Хорошоп): connects Claude, Cursor, Codex and other AI agents to your online store through the public API, control panel and storefront. 118 tools, many stores in one server.",
   "type": "module",
@@ -15,20 +15,14 @@
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
     "watch": "tsc --watch",
     "start": "node dist/index.js",
+    "test": "node scripts/smoke.mjs",
     "inspect": "npm run build && npx @modelcontextprotocol/inspector node dist/index.js",
-    "docs:tools": "npm run build && node scripts/tools-doc.mjs"
+    "docs:tools": "npm run build && node scripts/tools-doc.mjs",
+    "docs:tools:check": "npm run build && node scripts/tools-doc.mjs --check"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/IgorShutko/horoshop-mcp.git"
-  },
-  "homepage": "https://github.com/IgorShutko/horoshop-mcp#readme",
-  "bugs": {
-    "url": "https://github.com/IgorShutko/horoshop-mcp/issues"
-  },
-  "author": "Igor Shutko (https://t.me/shutko_igor)",
   "keywords": [
     "mcp",
     "mcp-server",
@@ -45,7 +39,18 @@
     "хорошоп",
     "ai-agents"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IgorShutko/horoshop-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/IgorShutko/horoshop-mcp/issues"
+  },
+  "homepage": "https://igorshutko.github.io/horoshop-mcp/",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.13.0",
     "node-html-parser": "^7.1.0",

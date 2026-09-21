@@ -1,0 +1,1392 @@
+{
+  "server": "horoshop-mcp",
+  "generated_by": "npm run docs:tools",
+  "tool_count": 118,
+  "sections": [
+    {
+      "title": "Setup and diagnostics",
+      "doc": "docs/tools/setup-and-diagnostics.md",
+      "tools": 2
+    },
+    {
+      "title": "Catalog (public API)",
+      "doc": "docs/tools/catalog-public-api.md",
+      "tools": 4
+    },
+    {
+      "title": "Orders (public API)",
+      "doc": "docs/tools/orders-public-api.md",
+      "tools": 3
+    },
+    {
+      "title": "Categories, users, product sets (public API)",
+      "doc": "docs/tools/categories-users-product-sets-public-api.md",
+      "tools": 5
+    },
+    {
+      "title": "Payment, delivery, currency (public API)",
+      "doc": "docs/tools/payment-delivery-currency-public-api.md",
+      "tools": 5
+    },
+    {
+      "title": "B2B (public API)",
+      "doc": "docs/tools/b2b-public-api.md",
+      "tools": 2
+    },
+    {
+      "title": "Webhooks (public API)",
+      "doc": "docs/tools/webhooks-public-api.md",
+      "tools": 2
+    },
+    {
+      "title": "Storefront: cart and checkout",
+      "doc": "docs/tools/storefront-cart-and-checkout.md",
+      "tools": 6
+    },
+    {
+      "title": "Admin panel: generic engine",
+      "doc": "docs/tools/admin-panel-generic-engine.md",
+      "tools": 6
+    },
+    {
+      "title": "Admin panel: orders and analytics",
+      "doc": "docs/tools/admin-panel-orders-and-analytics.md",
+      "tools": 8
+    },
+    {
+      "title": "Admin panel: products, prices, images",
+      "doc": "docs/tools/admin-panel-products-prices-images.md",
+      "tools": 9
+    },
+    {
+      "title": "Admin panel: characteristics and dictionaries",
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md",
+      "tools": 15
+    },
+    {
+      "title": "Admin panel: categories, pages, blog, banners, filters",
+      "doc": "docs/tools/admin-panel-categories-pages-blog-banners-filters.md",
+      "tools": 12
+    },
+    {
+      "title": "Admin panel: SEO, sitemap, redirects",
+      "doc": "docs/tools/admin-panel-seo-sitemap-redirects.md",
+      "tools": 11
+    },
+    {
+      "title": "Admin panel: marketplace feeds",
+      "doc": "docs/tools/admin-panel-marketplace-feeds.md",
+      "tools": 6
+    },
+    {
+      "title": "Admin panel: design and localization",
+      "doc": "docs/tools/admin-panel-design-and-localization.md",
+      "tools": 8
+    },
+    {
+      "title": "Admin panel: store settings, marketing, fiscal receipts",
+      "doc": "docs/tools/admin-panel-store-settings-marketing-fiscal-receipts.md",
+      "tools": 14
+    }
+  ],
+  "tools": [
+    {
+      "name": "horoshop_list_stores",
+      "section": "Setup and diagnostics",
+      "summary": "List configured stores",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/setup-and-diagnostics.md#horoshop_list_stores",
+      "params": "allowLarge?: boolean"
+    },
+    {
+      "name": "horoshop_check_auth",
+      "section": "Setup and diagnostics",
+      "summary": "Check store authentication",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/setup-and-diagnostics.md#horoshop_check_auth",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_catalog_export",
+      "section": "Catalog (public API)",
+      "summary": "Export catalog products",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/catalog-public-api.md#horoshop_catalog_export",
+      "params": "allowLarge?: boolean, store?: string, expr?: object, offset?: integer, limit?: integer, includedParams?: string[], excludedParams?: string[], lite?: boolean"
+    },
+    {
+      "name": "horoshop_catalog_import",
+      "section": "Catalog (public API)",
+      "summary": "Import / update catalog products",
+      "access": "destructive write, idempotent",
+      "read_only": false,
+      "destructive": true,
+      "supports_dry_run": true,
+      "doc": "docs/tools/catalog-public-api.md#horoshop_catalog_import",
+      "params": "store?: string, products?: object[], productsFile?: string, dryRun?: boolean, verbose?: boolean"
+    },
+    {
+      "name": "horoshop_catalog_process_images",
+      "section": "Catalog (public API)",
+      "summary": "Process FTP-uploaded images",
+      "access": "destructive write",
+      "read_only": false,
+      "destructive": true,
+      "supports_dry_run": false,
+      "doc": "docs/tools/catalog-public-api.md#horoshop_catalog_process_images",
+      "params": "store?: string, removePrevImages?: boolean"
+    },
+    {
+      "name": "horoshop_icons_export",
+      "section": "Catalog (public API)",
+      "summary": "Export stickers / icons",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/catalog-public-api.md#horoshop_icons_export",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_orders_get",
+      "section": "Orders (public API)",
+      "summary": "Get orders",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/orders-public-api.md#horoshop_orders_get",
+      "params": "allowLarge?: boolean, store?: string, from?: string, to?: string, ids?: integer[], status?: integer | integer[], additionalData?: boolean, offset?: integer, limit?: integer"
+    },
+    {
+      "name": "horoshop_orders_update",
+      "section": "Orders (public API)",
+      "summary": "Update orders",
+      "access": "destructive write, idempotent",
+      "read_only": false,
+      "destructive": true,
+      "supports_dry_run": false,
+      "doc": "docs/tools/orders-public-api.md#horoshop_orders_update",
+      "params": "orders: object[], store?: string, returnStock?: boolean"
+    },
+    {
+      "name": "horoshop_orders_get_statuses",
+      "section": "Orders (public API)",
+      "summary": "Get available order statuses",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/orders-public-api.md#horoshop_orders_get_statuses",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_pages_export",
+      "section": "Categories, users, product sets (public API)",
+      "summary": "Export categories",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/categories-users-product-sets-public-api.md#horoshop_pages_export",
+      "params": "allowLarge?: boolean, store?: string, parent?: integer"
+    },
+    {
+      "name": "horoshop_users_export",
+      "section": "Categories, users, product sets (public API)",
+      "summary": "Export users",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/categories-users-product-sets-public-api.md#horoshop_users_export",
+      "params": "allowLarge?: boolean, store?: string, from?: string, to?: string, offset?: integer, limit?: integer"
+    },
+    {
+      "name": "horoshop_users_import",
+      "section": "Categories, users, product sets (public API)",
+      "summary": "Import / update users",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/categories-users-product-sets-public-api.md#horoshop_users_import",
+      "params": "users: object[], store?: string"
+    },
+    {
+      "name": "horoshop_product_set_import",
+      "section": "Categories, users, product sets (public API)",
+      "summary": "Import / update product sets",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/categories-users-product-sets-public-api.md#horoshop_product_set_import",
+      "params": "items: object[], store?: string"
+    },
+    {
+      "name": "horoshop_product_set_remove",
+      "section": "Categories, users, product sets (public API)",
+      "summary": "Remove product sets",
+      "access": "destructive write, idempotent",
+      "read_only": false,
+      "destructive": true,
+      "supports_dry_run": false,
+      "doc": "docs/tools/categories-users-product-sets-public-api.md#horoshop_product_set_remove",
+      "params": "articles: string[], store?: string"
+    },
+    {
+      "name": "horoshop_payment_export",
+      "section": "Payment, delivery, currency (public API)",
+      "summary": "Export payment options",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/payment-delivery-currency-public-api.md#horoshop_payment_export",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_payment_methods",
+      "section": "Payment, delivery, currency (public API)",
+      "summary": "Export payment methods",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/payment-delivery-currency-public-api.md#horoshop_payment_methods",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_delivery_export",
+      "section": "Payment, delivery, currency (public API)",
+      "summary": "Export delivery options",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/payment-delivery-currency-public-api.md#horoshop_delivery_export",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_delivery_types",
+      "section": "Payment, delivery, currency (public API)",
+      "summary": "Export delivery types",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/payment-delivery-currency-public-api.md#horoshop_delivery_types",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_currency_export",
+      "section": "Payment, delivery, currency (public API)",
+      "summary": "Export currencies and rates",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/payment-delivery-currency-public-api.md#horoshop_currency_export",
+      "params": "allowLarge?: boolean, store?: string, iso?: string[], ids?: integer[], enabledOnly?: boolean"
+    },
+    {
+      "name": "horoshop_customer_groups_export",
+      "section": "B2B (public API)",
+      "summary": "Export customer groups (B2B)",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/b2b-public-api.md#horoshop_customer_groups_export",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_price_levels_export",
+      "section": "B2B (public API)",
+      "summary": "Export price levels (B2B)",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/b2b-public-api.md#horoshop_price_levels_export",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_hooks_subscribe",
+      "section": "Webhooks (public API)",
+      "summary": "Subscribe to a webhook",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/webhooks-public-api.md#horoshop_hooks_subscribe",
+      "params": "event: \"order_created\" | \"user_signup\" | \"request_call_me\" | \"order_paid\" | \"user_update\" | \"order_update\" | \"comments_created\", target_url: string, store?: string"
+    },
+    {
+      "name": "horoshop_hooks_unsubscribe",
+      "section": "Webhooks (public API)",
+      "summary": "Unsubscribe from a webhook",
+      "access": "destructive write, idempotent",
+      "read_only": false,
+      "destructive": true,
+      "supports_dry_run": false,
+      "doc": "docs/tools/webhooks-public-api.md#horoshop_hooks_unsubscribe",
+      "params": "id: integer, target_url: string, store?: string"
+    },
+    {
+      "name": "horoshop_cart_get",
+      "section": "Storefront: cart and checkout",
+      "summary": "Read the buyer's cart",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/storefront-cart-and-checkout.md#horoshop_cart_get",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_cart_add",
+      "section": "Storefront: cart and checkout",
+      "summary": "Add a product to the cart",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/storefront-cart-and-checkout.md#horoshop_cart_add",
+      "params": "product: integer | string, store?: string, quantity?: integer, type?: string"
+    },
+    {
+      "name": "horoshop_cart_set_quantity",
+      "section": "Storefront: cart and checkout",
+      "summary": "Change a cart line's quantity",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/storefront-cart-and-checkout.md#horoshop_cart_set_quantity",
+      "params": "hash: string, quantity: integer, store?: string"
+    },
+    {
+      "name": "horoshop_cart_remove",
+      "section": "Storefront: cart and checkout",
+      "summary": "Remove a cart line",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/storefront-cart-and-checkout.md#horoshop_cart_remove",
+      "params": "hash: string, store?: string"
+    },
+    {
+      "name": "horoshop_cart_apply_coupon",
+      "section": "Storefront: cart and checkout",
+      "summary": "Apply a coupon to the cart",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/storefront-cart-and-checkout.md#horoshop_cart_apply_coupon",
+      "params": "code: string, store?: string"
+    },
+    {
+      "name": "horoshop_checkout_inspect",
+      "section": "Storefront: cart and checkout",
+      "summary": "Inspect the checkout page",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/storefront-cart-and-checkout.md#horoshop_checkout_inspect",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_login_check",
+      "section": "Admin panel: generic engine",
+      "summary": "Check admin session",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-generic-engine.md#horoshop_admin_login_check",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_entities",
+      "section": "Admin panel: generic engine",
+      "summary": "List admin entity types",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-generic-engine.md#horoshop_admin_entities",
+      "params": "allowLarge?: boolean"
+    },
+    {
+      "name": "horoshop_admin_record_get",
+      "section": "Admin panel: generic engine",
+      "summary": "Read any admin record",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-generic-engine.md#horoshop_admin_record_get",
+      "params": "entity: integer | string, id: integer | string, allowLarge?: boolean, store?: string, parent?: integer, fields?: string[]"
+    },
+    {
+      "name": "horoshop_admin_list",
+      "section": "Admin panel: generic engine",
+      "summary": "List admin records",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-generic-engine.md#horoshop_admin_list",
+      "params": "entity: integer | string, allowLarge?: boolean, store?: string, parent?: integer, search?: string, searchColumn?: integer | string, page?: integer, perPage?: integer, maxRows?: integer, langStatus?: boolean"
+    },
+    {
+      "name": "horoshop_admin_record_delete",
+      "section": "Admin panel: generic engine",
+      "summary": "Delete admin records",
+      "access": "destructive write, idempotent",
+      "read_only": false,
+      "destructive": true,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-generic-engine.md#horoshop_admin_record_delete",
+      "params": "entity: integer | string, ids: integer | string[], store?: string, parent?: integer, withModifications?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_record_save",
+      "section": "Admin panel: generic engine",
+      "summary": "Write any admin record",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-generic-engine.md#horoshop_admin_record_save",
+      "params": "entity: integer | string, id: integer | string, store?: string, set?: object, append?: object, prepend?: object, verbose?: boolean, allowPlaceholderLoss?: boolean, parent?: integer, allowNewFields?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_order_resolve",
+      "section": "Admin panel: orders and analytics",
+      "summary": "Resolve an order number to its admin record id",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-orders-and-analytics.md#horoshop_admin_order_resolve",
+      "params": "allowLarge?: boolean, store?: string, orderId?: integer, adminId?: integer | string, maxProbes?: integer, maxRows?: integer"
+    },
+    {
+      "name": "horoshop_admin_order_get",
+      "section": "Admin panel: orders and analytics",
+      "summary": "Read one order from the admin editor",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-orders-and-analytics.md#horoshop_admin_order_get",
+      "params": "allowLarge?: boolean, store?: string, orderId?: integer, adminId?: integer | string, maxProbes?: integer, maxRows?: integer"
+    },
+    {
+      "name": "horoshop_admin_order_update",
+      "section": "Admin panel: orders and analytics",
+      "summary": "Edit an order's recipient, delivery and payment",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-orders-and-analytics.md#horoshop_admin_order_update",
+      "params": "adminId: integer | string, store?: string, name?: string, phone?: string, email?: string, city?: string, cityId?: integer | string, address?: string, managerComment?: string, payed?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_order_status_change",
+      "section": "Admin panel: orders and analytics",
+      "summary": "Change an order's status (and return stock on cancel)",
+      "access": "destructive write, idempotent",
+      "read_only": false,
+      "destructive": true,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-orders-and-analytics.md#horoshop_admin_order_status_change",
+      "params": "status: integer, store?: string, orderId?: integer, adminId?: integer | string, returnStock?: boolean, confirm?: boolean, verifyStock?: boolean, stockCheckLimit?: integer, maxProbes?: integer, maxRows?: integer, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_order_delete",
+      "section": "Admin panel: orders and analytics",
+      "summary": "Delete an order (both halves)",
+      "access": "destructive write, idempotent",
+      "read_only": false,
+      "destructive": true,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-orders-and-analytics.md#horoshop_admin_order_delete",
+      "params": "store?: string, orderId?: integer, adminId?: integer | string, verifyStock?: boolean, stockCheckLimit?: integer, maxProbes?: integer, maxRows?: integer, confirm?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_order_print_url",
+      "section": "Admin panel: orders and analytics",
+      "summary": "Build the delivery-note print URL",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-orders-and-analytics.md#horoshop_admin_order_print_url",
+      "params": "adminIds: integer | string[], format: \"marking\" | \"marking100x100\" | \"html\", allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_order_status_set",
+      "section": "Admin panel: orders and analytics",
+      "summary": "Create or edit an order status",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-orders-and-analytics.md#horoshop_admin_order_status_set",
+      "params": "titles: object, store?: string, id?: integer | string, successful?: boolean, inReports?: boolean, sortOrder?: integer, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_reports_dashboard",
+      "section": "Admin panel: orders and analytics",
+      "summary": "Read the store analytics dashboard (Аналитика)",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-orders-and-analytics.md#horoshop_admin_reports_dashboard",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_product_stock_set",
+      "section": "Admin panel: products, prices, images",
+      "summary": "Set a product's warehouse stock",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-products-prices-images.md#horoshop_admin_product_stock_set",
+      "params": "store?: string, article?: string, productId?: integer | string, quantity?: integer, delta?: integer, warehouse?: integer | string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_upload_image",
+      "section": "Admin panel: products, prices, images",
+      "summary": "Upload a file into any admin media field (logos, favicon, covers, brand/benefit/colour/payment images, avatars)",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-products-prices-images.md#horoshop_admin_upload_image",
+      "params": "store?: string, target?: \"header_logo\" | \"footer_logo\" | \"print_logo\" | \"mobile_logo\" | \"og_image\" | \"favicon\" | \"watermark\" | \"category_cover\" | \"brand_logo\" | \"benefit_image\" | \"color_icon\" | \"filter_color_icon\" | \"payment_icon\" | \"admin_avatar\" | \"customer_avatar\" | \"service_file\", entity?: integer | string, field?: string, id?: integer | string, url?: string, base64?: string, filename?: string, contentType?: string, remove?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_export_characteristics",
+      "section": "Admin panel: products, prices, images",
+      "summary": "Export a product template's characteristics to Excel",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-products-prices-images.md#horoshop_admin_export_characteristics",
+      "params": "templateId: integer | string, store?: string"
+    },
+    {
+      "name": "horoshop_admin_products_group_edit",
+      "section": "Admin panel: products, prices, images",
+      "summary": "Bulk-edit products (grid group operations)",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-products-prices-images.md#horoshop_admin_products_group_edit",
+      "params": "operation: \"display\" | \"presence\" | \"icons\" | \"countdown\" | \"marketplace\" | \"copy\", store?: string, articles?: string[], productIds?: integer | string[], value?: boolean, presence?: string | integer, icon?: string | integer, marketplace?: string | integer, endTime?: string, utcOffsetMinutes?: integer, message?: object, copyImages?: boolean, maxProducts?: integer, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_products_merge",
+      "section": "Admin panel: products, prices, images",
+      "summary": "Merge products into one modification group",
+      "access": "destructive write",
+      "read_only": false,
+      "destructive": true,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-products-prices-images.md#horoshop_admin_products_merge",
+      "params": "main: string | integer, store?: string, articles?: string[], productIds?: integer | string[], dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_products_price_set",
+      "section": "Admin panel: products, prices, images",
+      "summary": "Bulk-set product prices (by article, with guards and rollback)",
+      "access": "destructive write, idempotent",
+      "read_only": false,
+      "destructive": true,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-products-prices-images.md#horoshop_admin_products_price_set",
+      "params": "store?: string, articles?: string[], items?: object[], mode?: \"absolute\" | \"percent\" | \"amount\", price?: number, percent?: number, amount?: number, priceOld?: number, setPriceOldFromCurrent?: boolean, roundTo?: number, scaleThreshold?: integer, changeThresholdPercent?: number, confirmProductCount?: integer, confirmBigChange?: boolean, allowMissing?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_price_import_parse",
+      "section": "Admin panel: products, prices, images",
+      "summary": "Parse a supplier price list from a URL (read-only) and propose a column mapping",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-products-prices-images.md#horoshop_admin_price_import_parse",
+      "params": "url: string, allowLarge?: boolean, store?: string, targetSearch?: string, sampleRows?: integer"
+    },
+    {
+      "name": "horoshop_admin_price_import_run",
+      "section": "Admin panel: products, prices, images",
+      "summary": "Dry-run or execute a supplier price-list import",
+      "access": "destructive write",
+      "read_only": false,
+      "destructive": true,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-products-prices-images.md#horoshop_admin_price_import_run",
+      "params": "url: string, store?: string, columns?: string | integer | null[], settings?: object, supplierId?: integer | string, includeFirstRow?: boolean, dryRun?: boolean, confirm?: boolean, confirmCatalogWide?: boolean, maxSteps?: integer"
+    },
+    {
+      "name": "horoshop_admin_import_images",
+      "section": "Admin panel: products, prices, images",
+      "summary": "Bulk-import local images by file name",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-products-prices-images.md#horoshop_admin_import_images",
+      "params": "store?: string, files?: string[], dir?: string, keepExistingGallery?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_dictionaries",
+      "section": "Admin panel: characteristics and dictionaries",
+      "summary": "List attribute dictionaries",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md#horoshop_admin_dictionaries",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_dictionary_create",
+      "section": "Admin panel: characteristics and dictionaries",
+      "summary": "Create a new attribute dictionary",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md#horoshop_admin_dictionary_create",
+      "params": "title: string, store?: string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_dictionary_rename",
+      "section": "Admin panel: characteristics and dictionaries",
+      "summary": "Rename an attribute dictionary",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md#horoshop_admin_dictionary_rename",
+      "params": "title: string, store?: string, book?: integer | string, id?: integer | string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_dictionary_delete",
+      "section": "Admin panel: characteristics and dictionaries",
+      "summary": "Delete an attribute dictionary",
+      "access": "destructive write, idempotent",
+      "read_only": false,
+      "destructive": true,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md#horoshop_admin_dictionary_delete",
+      "params": "store?: string, book?: integer | string, id?: integer | string, confirm?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_dictionary_values",
+      "section": "Admin panel: characteristics and dictionaries",
+      "summary": "List dictionary values",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md#horoshop_admin_dictionary_values",
+      "params": "allowLarge?: boolean, store?: string, book?: integer | string, id?: integer | string"
+    },
+    {
+      "name": "horoshop_admin_dictionary_value_delete",
+      "section": "Admin panel: characteristics and dictionaries",
+      "summary": "Delete a dictionary value",
+      "access": "destructive write, idempotent",
+      "read_only": false,
+      "destructive": true,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md#horoshop_admin_dictionary_value_delete",
+      "params": "valueId: integer | string, store?: string, book?: integer | string, id?: integer | string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_dictionary_value_set",
+      "section": "Admin panel: characteristics and dictionaries",
+      "summary": "Translate / rename a dictionary value",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md#horoshop_admin_dictionary_value_set",
+      "params": "valueId: integer | string, titles: object, store?: string, book?: integer | string, id?: integer | string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_dictionary_add_value",
+      "section": "Admin panel: characteristics and dictionaries",
+      "summary": "Create a dictionary value (via a product's characteristic)",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md#horoshop_admin_dictionary_add_value",
+      "params": "characteristic: string, value: string, article: string, store?: string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_product_templates",
+      "section": "Admin panel: characteristics and dictionaries",
+      "summary": "List product templates",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md#horoshop_admin_product_templates",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_product_template_get",
+      "section": "Admin panel: characteristics and dictionaries",
+      "summary": "Read a product template",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md#horoshop_admin_product_template_get",
+      "params": "id: integer | string, allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_product_template_set",
+      "section": "Admin panel: characteristics and dictionaries",
+      "summary": "Edit a product template",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md#horoshop_admin_product_template_set",
+      "params": "id: integer | string, set: object, store?: string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_template_schema",
+      "section": "Admin panel: characteristics and dictionaries",
+      "summary": "Read a category's characteristic schema",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md#horoshop_admin_template_schema",
+      "params": "template: integer | string, allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_template_param_add",
+      "section": "Admin panel: characteristics and dictionaries",
+      "summary": "Add a characteristic to a category",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md#horoshop_admin_template_param_add",
+      "params": "template: integer | string, group: integer | string, title: string, name: string, type: \"input\" | \"select\" | \"checkbox\" | \"number\" | \"textarea\" | \"htmlarea\", store?: string, book?: integer | string, multi?: boolean, inGrid?: boolean, paramId?: integer | string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_template_param_books",
+      "section": "Admin panel: characteristics and dictionaries",
+      "summary": "List dictionaries a characteristic can use",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md#horoshop_admin_template_param_books",
+      "params": "template: integer | string, allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_template_param_delete",
+      "section": "Admin panel: characteristics and dictionaries",
+      "summary": "Delete a characteristic from a category",
+      "access": "destructive write",
+      "read_only": false,
+      "destructive": true,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-characteristics-and-dictionaries.md#horoshop_admin_template_param_delete",
+      "params": "template: integer | string, paramId: integer | string, store?: string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_page_get",
+      "section": "Admin panel: categories, pages, blog, banners, filters",
+      "summary": "Read page/category (admin)",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-categories-pages-blog-banners-filters.md#horoshop_admin_page_get",
+      "params": "id: integer | string, allowLarge?: boolean, store?: string, parent?: integer"
+    },
+    {
+      "name": "horoshop_admin_page_seo_set",
+      "section": "Admin panel: categories, pages, blog, banners, filters",
+      "summary": "Set page/category SEO (admin)",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-categories-pages-blog-banners-filters.md#horoshop_admin_page_seo_set",
+      "params": "id: integer | string, store?: string, parent?: integer, langs?: object, append?: any, prepend?: any, verbose?: boolean, allowPlaceholderLoss?: boolean, payloadFile?: string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_banner_create",
+      "section": "Admin panel: categories, pages, blog, banners, filters",
+      "summary": "Create a banner with its image (homepage / above-header / contacts lines)",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-categories-pages-blog-banners-filters.md#horoshop_admin_banner_create",
+      "params": "section: \"banner_line_1\" | \"banner_line_2\" | \"banner_line_3\" | \"top\" | \"banner_line_top\" | \"banner_line_bottom\", template: \"image\" | \"image_2x\" | \"image_3x\" | \"image_big\" | \"image_column\" | \"image_cover\" | \"image_small\" | \"image_wide\" | \"image_wide2x\" | \"image_wide3x\" | \"image_wideblock\" | \"product\" | \"product_big\" | \"product_column\" | \"product_cover\" | \"product_small\" | \"product_wide\", title: string, store?: string, url?: string, base64?: string, page?: string | number, lang?: integer, alt?: string, imageTitle?: string, borderColor?: string, link?: string, enabled?: boolean, allowInvisibleSection?: boolean, filename?: string, contentType?: string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_blog_post_create",
+      "section": "Admin panel: categories, pages, blog, banners, filters",
+      "summary": "Create a blog / news article (with optional cover)",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-categories-pages-blog-banners-filters.md#horoshop_admin_blog_post_create",
+      "params": "title: string, store?: string, announce?: string, text?: string, h1?: string, seoTitle?: string, seoKeywords?: string, seoDescription?: string, ru?: object, slug?: string, date?: string, active?: boolean, promo?: boolean, disallowComments?: boolean, cover?: object, image?: any, rubric?: integer, parent?: integer, payloadFile?: string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_blog_post_update",
+      "section": "Admin panel: categories, pages, blog, banners, filters",
+      "summary": "Update a blog / news article (text, SEO, cover)",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-categories-pages-blog-banners-filters.md#horoshop_admin_blog_post_update",
+      "params": "id: integer | string, store?: string, title?: string, announce?: string, text?: string, h1?: string, seoTitle?: string, seoKeywords?: string, seoDescription?: string, ru?: object, slug?: string, date?: string, active?: boolean, promo?: boolean, disallowComments?: boolean, cover?: object, image?: any, rubric?: integer, parent?: integer, append?: object, prepend?: any, verbose?: boolean, allowPlaceholderLoss?: boolean, payloadFile?: string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_page_create",
+      "section": "Admin panel: categories, pages, blog, banners, filters",
+      "summary": "Create an info/text page that actually opens on the storefront",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-categories-pages-blog-banners-filters.md#horoshop_admin_page_create",
+      "params": "title: string, store?: string, parent?: integer, slug?: string, seoTitle?: string, seoKeywords?: string, seoDescription?: string, h1?: string, text?: string, ru?: object, inMenu?: boolean, template?: integer | string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_category_create",
+      "section": "Admin panel: categories, pages, blog, banners, filters",
+      "summary": "Create a catalog category (SEO + SEO-text + cover) in one call",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-categories-pages-blog-banners-filters.md#horoshop_admin_category_create",
+      "params": "parent: integer, title: string, store?: string, slug?: string, seoTitle?: string, seoKeywords?: string, seoDescription?: string, h1?: string, seoText?: string, ru?: object, discount?: number | string, inPopularMenu?: boolean, showNav?: boolean, showPagesOnly?: boolean, listView?: number | string, inMenu?: boolean, template?: integer | string, cover?: object, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_category_update",
+      "section": "Admin panel: categories, pages, blog, banners, filters",
+      "summary": "Update a catalog category (title, SEO, SEO-text, flags, cover)",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-categories-pages-blog-banners-filters.md#horoshop_admin_category_update",
+      "params": "id: integer | string, store?: string, parent?: integer, title?: string, slug?: string, seoTitle?: string, seoKeywords?: string, seoDescription?: string, h1?: string, seoText?: string, ru?: object, discount?: number | string, inPopularMenu?: boolean, showNav?: boolean, showPagesOnly?: boolean, listView?: number | string, inMenu?: boolean, cover?: object, append?: object, prepend?: any, verbose?: boolean, allowPlaceholderLoss?: boolean, payloadFile?: string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_indexed_filter_create",
+      "section": "Admin panel: categories, pages, blog, banners, filters",
+      "summary": "Create an indexed (SEO) filter with several conditions",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-categories-pages-blog-banners-filters.md#horoshop_admin_indexed_filter_create",
+      "params": "title: string, page: integer | string, filters: integer | string[], store?: string, enabled?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_indexed_filter_update",
+      "section": "Admin panel: categories, pages, blog, banners, filters",
+      "summary": "Update an indexed (SEO) filter (title, page, conditions)",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-categories-pages-blog-banners-filters.md#horoshop_admin_indexed_filter_update",
+      "params": "id: integer | string, store?: string, title?: string, page?: integer | string, filters?: integer | string[], enabled?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_filter_preset_create",
+      "section": "Admin panel: categories, pages, blog, banners, filters",
+      "summary": "Create an SEO filter preset (custom slug + SEO block) in one call",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-categories-pages-blog-banners-filters.md#horoshop_admin_filter_preset_create",
+      "params": "page: integer | string, params: string, slug: string, title: object, store?: string, seo?: object, enabled?: boolean, sortorder?: integer | string, aliasParent?: integer | string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_filter_preset_update",
+      "section": "Admin panel: categories, pages, blog, banners, filters",
+      "summary": "Update an SEO filter preset (page, params, slug, SEO block)",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-categories-pages-blog-banners-filters.md#horoshop_admin_filter_preset_update",
+      "params": "id: integer | string, store?: string, page?: integer | string, params?: string, slug?: string, title?: object, seo?: object, append?: object, prepend?: object, verbose?: boolean, allowPlaceholderLoss?: boolean, enabled?: boolean, sortorder?: integer | string, aliasParent?: integer | string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_redirect_list",
+      "section": "Admin panel: SEO, sitemap, redirects",
+      "summary": "List URL redirects",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-seo-sitemap-redirects.md#horoshop_admin_redirect_list",
+      "params": "allowLarge?: boolean, store?: string, includeTargets?: boolean"
+    },
+    {
+      "name": "horoshop_admin_redirect_create",
+      "section": "Admin panel: SEO, sitemap, redirects",
+      "summary": "Create URL redirect",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-seo-sitemap-redirects.md#horoshop_admin_redirect_create",
+      "params": "uri: string, store?: string, to?: string, handler?: integer | string, record?: integer | string, force?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_redirect_update",
+      "section": "Admin panel: SEO, sitemap, redirects",
+      "summary": "Update an existing URL redirect",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-seo-sitemap-redirects.md#horoshop_admin_redirect_update",
+      "params": "id: integer | string, store?: string, from?: string, to?: string, handler?: integer | string, record?: integer | string, force?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_redirect_bulk_create",
+      "section": "Admin panel: SEO, sitemap, redirects",
+      "summary": "Create URL redirects in bulk (list or file)",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-seo-sitemap-redirects.md#horoshop_admin_redirect_bulk_create",
+      "params": "store?: string, redirects?: object[], csvFile?: string, payloadFile?: string, skipConflicts?: boolean, force?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_redirect_generate_slashes",
+      "section": "Admin panel: SEO, sitemap, redirects",
+      "summary": "Mass-generate trailing-slash redirects",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-seo-sitemap-redirects.md#horoshop_admin_redirect_generate_slashes",
+      "params": "handlers: integer | string[], type: 1 | 2, store?: string, keepEmpty?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_redirect_delete",
+      "section": "Admin panel: SEO, sitemap, redirects",
+      "summary": "Delete URL redirect",
+      "access": "destructive write, idempotent",
+      "read_only": false,
+      "destructive": true,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-seo-sitemap-redirects.md#horoshop_admin_redirect_delete",
+      "params": "store?: string, id?: integer | string, ids?: integer | string[], dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_seo_settings_get",
+      "section": "Admin panel: SEO, sitemap, redirects",
+      "summary": "Read the additional SEO settings (pagination canonical/noindex, breadcrumbs)",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-seo-sitemap-redirects.md#horoshop_admin_seo_settings_get",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_seo_settings_set",
+      "section": "Admin panel: SEO, sitemap, redirects",
+      "summary": "Set the additional SEO settings (self-POST screen)",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-seo-sitemap-redirects.md#horoshop_admin_seo_settings_set",
+      "params": "store?: string, paginationCanonicalFirstPage?: boolean, paginationNoindex?: boolean, seoTextWithGetParams?: boolean, catalogInBreadcrumbs?: boolean, brandInBreadcrumbs?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_robots_get",
+      "section": "Admin panel: SEO, sitemap, redirects",
+      "summary": "Read the store's live robots.txt",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-seo-sitemap-redirects.md#horoshop_admin_robots_get",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_sitemap_regenerate",
+      "section": "Admin panel: SEO, sitemap, redirects",
+      "summary": "Regenerate the store's XML sitemap",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-seo-sitemap-redirects.md#horoshop_admin_sitemap_regenerate",
+      "params": "store?: string"
+    },
+    {
+      "name": "horoshop_admin_sitemap_status",
+      "section": "Admin panel: SEO, sitemap, redirects",
+      "summary": "Read the store's XML sitemap (index + child URL counts)",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-seo-sitemap-redirects.md#horoshop_admin_sitemap_status",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_feed_list",
+      "section": "Admin panel: marketplace feeds",
+      "summary": "List marketplace feeds with their public URLs and live status",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-marketplace-feeds.md#horoshop_admin_feed_list",
+      "params": "allowLarge?: boolean, store?: string, probe?: boolean"
+    },
+    {
+      "name": "horoshop_admin_feed_set",
+      "section": "Admin panel: marketplace feeds",
+      "summary": "Switch a marketplace feed on/off, or change its alias",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-marketplace-feeds.md#horoshop_admin_feed_set",
+      "params": "feed: integer | string, store?: string, enabled?: boolean, alias?: string, confirm?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_feed_generate",
+      "section": "Admin panel: marketplace feeds",
+      "summary": "Generate a marketplace feed file and verify the public URL serves it",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-marketplace-feeds.md#horoshop_admin_feed_generate",
+      "params": "feed: integer | string, store?: string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_feed_params_get",
+      "section": "Admin panel: marketplace feeds",
+      "summary": "Read one feed's parameter mapping (availability / product condition)",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-marketplace-feeds.md#horoshop_admin_feed_params_get",
+      "params": "feed: integer | string, allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_feed_params_set",
+      "section": "Admin panel: marketplace feeds",
+      "summary": "Map / unmap a feed parameter value, or flip its two feed-level flags",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-marketplace-feeds.md#horoshop_admin_feed_params_set",
+      "params": "feed: integer | string, action: \"map\" | \"unmap\" | \"flags\", store?: string, parameter?: integer | string, localValueId?: integer | string, marketplaceValue?: string, multipleLang?: boolean, useSharedPhotosGallery?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_feed_categories_get",
+      "section": "Admin panel: marketplace feeds",
+      "summary": "Read a feed's category screen: local tree, marketplace tree, mapping",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-marketplace-feeds.md#horoshop_admin_feed_categories_get",
+      "params": "feed: integer | string, allowLarge?: boolean, store?: string, full?: boolean"
+    },
+    {
+      "name": "horoshop_admin_design_get",
+      "section": "Admin panel: design and localization",
+      "summary": "Read design config (application JSON)",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-design-and-localization.md#horoshop_admin_design_get",
+      "params": "allowLarge?: boolean, store?: string, section?: string"
+    },
+    {
+      "name": "horoshop_admin_design_set",
+      "section": "Admin panel: design and localization",
+      "summary": "Edit design config (application JSON)",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-design-and-localization.md#horoshop_admin_design_set",
+      "params": "section: string, patch: object, store?: string, recompile?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_css_get",
+      "section": "Admin panel: design and localization",
+      "summary": "Read custom CSS",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-design-and-localization.md#horoshop_admin_css_get",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_css_set",
+      "section": "Admin panel: design and localization",
+      "summary": "Set custom CSS",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-design-and-localization.md#horoshop_admin_css_set",
+      "params": "store?: string, desktop?: string, mobile?: string, force?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_languages",
+      "section": "Admin panel: design and localization",
+      "summary": "List store languages",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-design-and-localization.md#horoshop_admin_languages",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_language_set",
+      "section": "Admin panel: design and localization",
+      "summary": "Edit a store language",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-design-and-localization.md#horoshop_admin_language_set",
+      "params": "id: integer | string, store?: string, site_title?: string, enabled?: \"0\" | \"1\", is_displayed_in_admin?: \"0\" | \"1\", currency?: string, noindex?: \"0\" | \"1\", dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_interface_translation_get",
+      "section": "Admin panel: design and localization",
+      "summary": "Find interface translation strings",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-design-and-localization.md#horoshop_admin_interface_translation_get",
+      "params": "search: string, allowLarge?: boolean, store?: string, searchIn?: \"key\" | \"value\", lang?: \"ru\" | \"ua\" | \"en\" | \"pl\" | \"ro\", maxRows?: integer"
+    },
+    {
+      "name": "horoshop_admin_interface_translation_set",
+      "section": "Admin panel: design and localization",
+      "summary": "Set an interface translation string",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-design-and-localization.md#horoshop_admin_interface_translation_set",
+      "params": "value: string, store?: string, id?: integer | string, key?: string, lang?: \"ru\" | \"ua\" | \"en\" | \"pl\" | \"ro\", allowPlaceholderLoss?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_checkout_option_set",
+      "section": "Admin panel: store settings, marketing, fiscal receipts",
+      "summary": "Enable/disable or retitle a checkout option",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-store-settings-marketing-fiscal-receipts.md#horoshop_admin_checkout_option_set",
+      "params": "kind: \"payment\" | \"delivery\", id: integer | string, store?: string, enabled?: boolean, titles?: object, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_store_contacts",
+      "section": "Admin panel: store settings, marketing, fiscal receipts",
+      "summary": "Read or set the store's contacts",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-store-settings-marketing-fiscal-receipts.md#horoshop_admin_store_contacts",
+      "params": "store?: string, contacts?: object[], lang?: \"ua\" | \"ru\" | \"en\" | \"pl\" | \"ro\", dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_store_info_set",
+      "section": "Admin panel: store settings, marketing, fiscal receipts",
+      "summary": "Set store name, address, hours and product-card info tabs",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-store-settings-marketing-fiscal-receipts.md#horoshop_admin_store_info_set",
+      "params": "store?: string, siteName?: string, lang?: \"ua\" | \"ru\" | \"en\" | \"pl\" | \"ro\", address?: string, timetable?: string, infoDelivery?: string, infoPayment?: string, infoReturn?: string, infoWarranty?: string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_coupons_generate",
+      "section": "Admin panel: store settings, marketing, fiscal receipts",
+      "summary": "Generate gift certificates / discount coupons",
+      "access": "write",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-store-settings-marketing-fiscal-receipts.md#horoshop_admin_coupons_generate",
+      "params": "kind: \"certificate\" | \"coupon\", amount: number, count: integer, validUntil: string, store?: string, usesPerCoupon?: integer, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_settings_tracking",
+      "section": "Admin panel: store settings, marketing, fiscal receipts",
+      "summary": "Read or set the store's tracking / analytics scripts",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-store-settings-marketing-fiscal-receipts.md#horoshop_admin_settings_tracking",
+      "params": "store?: string, scriptOnTop?: string, scriptOnBottom?: string, scriptInHead?: string, ga4Id?: string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_settings_checkout",
+      "section": "Admin panel: store settings, marketing, fiscal receipts",
+      "summary": "Read or set checkout / order-form options",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-store-settings-marketing-fiscal-receipts.md#horoshop_admin_settings_checkout",
+      "params": "store?: string, showEmail?: boolean, requireEmail?: boolean, requireAuthorization?: boolean, newsletterSubscription?: boolean, newsletterSubscriptionDefault?: boolean, showCouponCode?: boolean, showCountries?: boolean, phoneMask?: boolean, orderWithoutCallback?: boolean, orderWithoutCallbackDefault?: boolean, commentFieldExpanded?: boolean, quickOrderEnabled?: boolean, quickOrderShowName?: boolean, quickOrderShowEmail?: boolean, quickOrderPriorityMobile?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_settings_catalog",
+      "section": "Admin panel: store settings, marketing, fiscal receipts",
+      "summary": "Read or set catalog behaviour options",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-store-settings-marketing-fiscal-receipts.md#horoshop_admin_settings_catalog",
+      "params": "store?: string, groupModifications?: boolean, useGeneratedTitle?: boolean, compareItems?: boolean, allowListView?: boolean, currencyRoundTo?: integer | string, primarySort?: string, newIconDaysDuration?: integer | string, accessMultiplicity?: boolean, accessUnitsOfMeasurement?: boolean, accessWholesalePrices?: boolean, accessMinOrder?: boolean, useResiduesByStock?: boolean, productsSetEnabled?: boolean, giftsEnabled?: boolean, specifyPrice?: boolean, digitalProductsEnabled?: boolean, cartAddOpen?: boolean, checkAllParams?: boolean, hintType?: string, mobileCardView?: boolean, highlightUnavailableModifications?: boolean, highlightMissingModifications?: boolean, contentCopyProtection?: boolean, omnibusPrice?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_settings_brand",
+      "section": "Admin panel: store settings, marketing, fiscal receipts",
+      "summary": "Read or set brand texts, timezone, map and moderation",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-store-settings-marketing-fiscal-receipts.md#horoshop_admin_settings_brand",
+      "params": "store?: string, siteName?: string, headerSite?: string, siteDescription?: string, slogan?: string, copyright?: string, aboutStore?: string, timezone?: string, multicurrencyEnabled?: boolean, commentsModeration?: boolean, onlinePaymentModeration?: boolean, gmapApiKey?: string, mapCode?: string, lang?: \"ua\" | \"ru\" | \"en\" | \"pl\" | \"ro\", dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_settings_social_auth",
+      "section": "Admin panel: store settings, marketing, fiscal receipts",
+      "summary": "Read or set social login providers",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-store-settings-marketing-fiscal-receipts.md#horoshop_admin_settings_social_auth",
+      "params": "store?: string, facebookAuth?: boolean, googleAuth?: boolean, linkedInAuth?: boolean, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_settings_get",
+      "section": "Admin panel: store settings, marketing, fiscal receipts",
+      "summary": "Read any general setting, or list what settings exist",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-store-settings-marketing-fiscal-receipts.md#horoshop_admin_settings_get",
+      "params": "allowLarge?: boolean, store?: string, section?: \"tracking\" | \"checkout\" | \"catalog\" | \"brand\" | \"social\", keys?: string[], fields?: string[], lang?: \"ua\" | \"ru\" | \"en\" | \"pl\" | \"ro\", catalog?: boolean, index?: boolean"
+    },
+    {
+      "name": "horoshop_admin_prro_get",
+      "section": "Admin panel: store settings, marketing, fiscal receipts",
+      "summary": "Read the Checkbox ПРРО (fiscalization) settings",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-store-settings-marketing-fiscal-receipts.md#horoshop_admin_prro_get",
+      "params": "allowLarge?: boolean, store?: string"
+    },
+    {
+      "name": "horoshop_admin_prro_set",
+      "section": "Admin panel: store settings, marketing, fiscal receipts",
+      "summary": "Set the Checkbox ПРРО (fiscalization) settings",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-store-settings-marketing-fiscal-receipts.md#horoshop_admin_prro_set",
+      "params": "store?: string, enabled?: boolean, automaticReceipts?: boolean, useTax?: boolean, login?: string, password?: string, cashboxLicenseKey?: string, sendCheckOnEmail?: boolean, sendCheckViaSms?: boolean, footer?: string, deliveryTitle?: string, paymentTitle?: string, deliveryAsProduct?: boolean, deliveryArticle?: string, paymentAsProduct?: boolean, paymentArticle?: string, deliveryTaxCode?: string, paymentTaxCode?: string, dryRun?: boolean"
+    },
+    {
+      "name": "horoshop_admin_tracking_get",
+      "section": "Admin panel: store settings, marketing, fiscal receipts",
+      "summary": "List the store's marketing / tracking services",
+      "access": "read-only",
+      "read_only": true,
+      "destructive": false,
+      "supports_dry_run": false,
+      "doc": "docs/tools/admin-panel-store-settings-marketing-fiscal-receipts.md#horoshop_admin_tracking_get",
+      "params": "allowLarge?: boolean, store?: string, onlyEnabled?: boolean"
+    },
+    {
+      "name": "horoshop_admin_tracking_set",
+      "section": "Admin panel: store settings, marketing, fiscal receipts",
+      "summary": "Switch a marketing / tracking service on or off and set its id",
+      "access": "write, idempotent",
+      "read_only": false,
+      "destructive": false,
+      "supports_dry_run": true,
+      "doc": "docs/tools/admin-panel-store-settings-marketing-fiscal-receipts.md#horoshop_admin_tracking_set",
+      "params": "service: string, store?: string, enabled?: boolean, identifier?: string, position?: string | integer, force?: boolean, dryRun?: boolean"
+    }
+  ]
+}

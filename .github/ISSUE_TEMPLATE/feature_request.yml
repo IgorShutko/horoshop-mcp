@@ -1,0 +1,21 @@
+name: Новий інструмент або можливість
+description: Розділ адмінки чи метод API, якого ще немає серед 118 інструментів
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: Яку задачу магазину це закриває
+      description: Що ви хочете доручити агентові і чому зараз це роблять руками
+    validations:
+      required: true
+  - type: input
+    id: section
+    attributes:
+      label: Розділ адмінки або метод API
+      placeholder: Налаштування → Знижки, або /api/orders/get
+  - type: textarea
+    id: notes
+    attributes:
+      label: Деталі
+      description: Посилання на документацію Хорошопу, приклади відповідей, особливості. Без доступів до магазину.

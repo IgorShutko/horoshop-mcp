@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Питання по підключенню
+    url: https://t.me/shutko_igor
+    about: Якщо сервер не стартує або незрозуміло, як підключити магазин
+  - name: Вразливість у безпеці
+    url: https://github.com/IgorShutko/horoshop-mcp/blob/main/SECURITY.md
+    about: Не створюйте публічну issue - напишіть напряму

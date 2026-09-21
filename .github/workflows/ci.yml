@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["18", "22"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      # Boots the server over stdio: 118 tools, clean stdout, every tool routable
+      # to a store. Catches the breakages a type check cannot see.
+      - run: npm test
+      # The tool reference is generated from `tools/list`; fail if it drifted.
+      - run: npm run docs:tools:check

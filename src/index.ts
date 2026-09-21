@@ -4,7 +4,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { loadConfig } from "./config.js";
 import { HoroshopClient } from "./client.js";
 import { registerTools, type ToolSpec } from "./register.js";
-import { startupLine } from "./buildInfo.js";
+import { startupLine, VERSION } from "./buildInfo.js";
 import { systemTools } from "./tools/system.js";
 import { catalogTools } from "./tools/catalog.js";
 import { orderTools } from "./tools/orders.js";
@@ -61,7 +61,7 @@ async function main(): Promise<void> {
   }
 
   const client = new HoroshopClient(config);
-  const server = new McpServer({ name: "horoshop-mcp", version: "0.1.0" });
+  const server = new McpServer({ name: "horoshop-mcp", version: VERSION });
 
   const allTools: ToolSpec[] = [
     ...systemTools,
