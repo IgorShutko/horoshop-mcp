@@ -2,6 +2,12 @@
 
 Формат за [Keep a Changelog](https://keepachangelog.com/uk/1.1.0/), версії за [SemVer](https://semver.org/lang/uk/).
 
+## [Не випущено]
+
+### Додано
+- Робочий процес публікації: реліз на GitHub відправляє пакет у npm (з provenance) і реєструє версію в офіційному реєстрі MCP через OIDC.
+- CI звіряє версії в `package.json` і `server.json`, щоб реєстр не отримав не ту.
+
 ## [0.2.0] - 2026-09-21
 
 ### Додано
