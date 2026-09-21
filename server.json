@@ -3,7 +3,7 @@
   "name": "io.github.igorshutko/horoshop-mcp",
   "title": "Horoshop MCP",
   "description": "Unofficial MCP server for Horoshop (Хорошоп) stores: catalog, orders, SEO, redirects, marketplace feeds, design and store settings through the public API, the admin panel and the storefront. 118 tools, many stores in one server.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "websiteUrl": "https://igorshutko.github.io/horoshop-mcp/",
   "repository": {
     "url": "https://github.com/IgorShutko/horoshop-mcp",
@@ -13,7 +13,7 @@
     {
       "registryType": "npm",
       "identifier": "horoshop-mcp-server",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "runtimeHint": "npx",
       "transport": { "type": "stdio" },
       "environmentVariables": [

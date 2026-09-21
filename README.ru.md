@@ -77,6 +77,8 @@ Cursor (`~/.cursor/mcp.json`), Claude Desktop (`claude_desktop_config.json`), Wi
 }
 ```
 
+Чтобы закрепить конкретную версию, добавьте тег к адресу: `github:IgorShutko/horoshop-mcp#v0.2.0`.
+
 В Windows используйте `"command": "cmd", "args": ["/c", "npx", "-y", "github:IgorShutko/horoshop-mcp"]`. Первый запуск скачивает и собирает пакет, это занимает около 20 секунд. У VS Code, Zed, Hermes Agent, Gemini CLI, OpenCode, Goose и других клиентов свой формат настроек: смотрите [инструкцию по установке](docs/INSTALL.ru.md), там же описана установка через клонирование и тайм-ауты клиентов.
 
 **5. Попробуйте.** Попросите агента:
