@@ -4,6 +4,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { loadConfig } from "./config.js";
 import { HoroshopClient } from "./client.js";
 import { registerTools, type ToolSpec } from "./register.js";
+import { prompts, registerPrompts } from "./prompts.js";
 import { startupLine, VERSION } from "./buildInfo.js";
 import { systemTools } from "./tools/system.js";
 import { catalogTools } from "./tools/catalog.js";
@@ -104,11 +105,12 @@ async function main(): Promise<void> {
     ...adminReportTools,
   ];
   registerTools(server, client, allTools);
+  registerPrompts(server);
 
   await server.connect(new StdioServerTransport());
   // stdout is the JSON-RPC channel — all logging must go to stderr.
   console.error(
-    `[horoshop-mcp] ready — ${allTools.length} tools, ${storeCount} store(s) configured.`,
+    `[horoshop-mcp] ready — ${allTools.length} tools, ${prompts.length} prompts, ${storeCount} store(s) configured.`,
   );
 }
 

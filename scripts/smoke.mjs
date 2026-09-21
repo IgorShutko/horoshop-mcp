@@ -26,6 +26,8 @@ function rpc() {
     const noise = [];
     let stderr = "";
     let buf = "";
+    let tools = [];
+    let prompts = [];
     const timer = setTimeout(() => {
       p.kill();
       reject(new Error("tools/list timed out after 60s"));
@@ -51,9 +53,20 @@ function rpc() {
           send({ jsonrpc: "2.0", method: "notifications/initialized" });
           send({ jsonrpc: "2.0", id: 2, method: "tools/list" });
         } else if (msg.id === 2) {
+          tools = msg.result.tools;
+          send({ jsonrpc: "2.0", id: 3, method: "prompts/list" });
+        } else if (msg.id === 3) {
+          prompts = msg.result.prompts;
+          send({
+            jsonrpc: "2.0",
+            id: 4,
+            method: "prompts/get",
+            params: { name: "category_seo", arguments: { store: "myshop", category: "Кросівки" } },
+          });
+        } else if (msg.id === 4) {
           clearTimeout(timer);
           p.kill();
-          resolve({ tools: msg.result.tools, noise, stderr });
+          resolve({ tools, prompts, rendered: msg.result, noise, stderr });
         }
       }
     });
@@ -67,7 +80,7 @@ function rpc() {
   });
 }
 
-const { tools, noise, stderr } = await rpc();
+const { tools, prompts, rendered, noise, stderr } = await rpc();
 
 assert.equal(noise.length, 0, `non-JSON written to stdout (breaks MCP clients):\n${noise.slice(0, 3).join("\n")}`);
 assert.ok(tools.length >= MIN_TOOLS, `expected >= ${MIN_TOOLS} tools, got ${tools.length}`);
@@ -100,5 +113,34 @@ for (const [input, want] of [
   assert.equal(normalizeBaseUrl(input), want, `normalizeBaseUrl(${input})`);
 }
 
+// Prompts are the ready-made scenarios a client shows in its own menu.
+assert.ok(prompts.length >= 7, `expected >= 7 prompts, got ${prompts.length}`);
+const toolNames = new Set(names);
+for (const p of prompts) {
+  assert.match(p.name, /^[a-z0-9_]+$/, `bad prompt name: ${p.name}`);
+  assert.ok(p.title?.trim(), `${p.name}: empty title`);
+  assert.ok(p.description?.trim(), `${p.name}: empty description`);
+}
+
+const text = rendered.messages?.[0]?.content?.text ?? "";
+assert.equal(rendered.messages.length, 1, "prompts/get should return one message");
+assert.ok(text.includes("Кросівки"), "prompts/get did not substitute its argument");
+assert.ok(text.includes("myshop"), "prompts/get did not substitute the store");
+
+// A scenario that names a tool the server does not have sends the model hunting
+// for something that is not there. Check every mention against tools/list.
+const { prompts: specs } = await import(join(ROOT, "dist", "prompts.js"));
+const sample = Object.fromEntries(
+  specs.flatMap((s) => Object.keys(s.args ?? {})).map((k) => [k, "X"]),
+);
+const mentioned = new Set(
+  specs.flatMap((s) => s.build(sample).match(/horoshop_[a-z0-9_]+/g) ?? []),
+);
+const missing = [...mentioned].filter((n) => !toolNames.has(n));
+assert.equal(missing.length, 0, `prompts mention tools that do not exist: ${missing.join(", ")}`);
+
 const readOnly = tools.filter((t) => t.annotations.readOnlyHint).length;
-console.log(`smoke ok — ${tools.length} tools (${readOnly} read-only, ${tools.length - readOnly} write), stdout clean`);
+console.log(
+  `smoke ok — ${tools.length} tools (${readOnly} read-only, ${tools.length - readOnly} write), ` +
+    `${prompts.length} prompts naming ${mentioned.size} tools, stdout clean`,
+);

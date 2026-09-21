@@ -28,7 +28,8 @@ A change is finished when `npm run build`, `npm test` and `npm run docs:tools:ch
 4. **Verify writes by reading back.** The platform answers `success` on writes that did not happen. After persisting, re-read the record and compare — the existing tools do this, new ones must too.
 5. **Secrets never leave in a response.** `src/admin/redact.ts` masks values under keys matching `key|token|secret|password|signature|private`. It is an output filter and deep-clones: never feed a redacted object back into a save.
 6. **The tool reference is generated.** Do not hand-edit `docs/TOOLS.md`, `docs/tools/*.md` or `docs/tools.json`.
-7. **No credentials in the tree.** `stores.json` is git-ignored. Never commit logins, passwords, tokens or client admin URLs — including in docs, comments and test fixtures.
+7. **Prompts may only name tools that exist.** `src/prompts.ts` holds the ready-made scenarios the client lists; a scenario that cites a removed or misspelled tool sends the model hunting for nothing. `npm test` checks every `horoshop_*` mention against `tools/list`, so rename a tool and the prompts fail with it.
+8. **No credentials in the tree.** `stores.json` is git-ignored. Never commit logins, passwords, tokens or client admin URLs — including in docs, comments and test fixtures.
 
 ## Layout
 
@@ -39,6 +40,7 @@ A change is finished when `npm run build`, `npm test` and `npm run docs:tools:ch
 | `src/client.ts` | documented public API client |
 | `src/admin/` | admin-panel engine: session, form parsing, guards, redaction |
 | `src/tools/` | the tools themselves, grouped by area |
+| `src/prompts.ts` | ready-made scenarios (MCP prompts), written in Ukrainian for the shop owner |
 | `scripts/smoke.mjs` | the smoke test |
 | `scripts/tools-doc.mjs` | doc generator (single source of truth for the reference) |
 | `docs/` | install guides (uk/ru/en), tool reference, internals |
