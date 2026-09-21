@@ -1,6 +1,6 @@
 {
   "name": "horoshop-mcp-server",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Unofficial MCP server for Horoshop (Хорошоп): connects Claude, Cursor, Codex and other AI agents to your online store through the public API, control panel and storefront. 118 tools, many stores in one server.",
   "type": "module",
   "bin": {
