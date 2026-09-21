@@ -46,6 +46,20 @@ jobs:
         run: |
           curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" \
             | tar xz mcp-publisher
+      # The registry verifies the bundle by hash, and the hash is only known once
+      # the asset is on the release - so it is pinned here, not committed.
+      - name: Pin the bundle hash into server.json
+        run: |
+          url=$(node -p "require('./server.json').packages.find(p => p.registryType === 'mcpb').identifier")
+          curl -fsSL --retry 5 --retry-all-errors -o bundle.mcpb "$url"
+          sha=$(sha256sum bundle.mcpb | cut -d' ' -f1)
+          node -e '
+            const fs = require("fs");
+            const s = JSON.parse(fs.readFileSync("server.json", "utf8"));
+            s.packages.find((p) => p.registryType === "mcpb").fileSha256 = process.argv[1];
+            fs.writeFileSync("server.json", JSON.stringify(s, null, 2) + "\n");
+          ' "$sha"
+          echo "bundle sha256: $sha"
       - run: ./mcp-publisher login github-oidc
       - run: ./mcp-publisher publish
 
