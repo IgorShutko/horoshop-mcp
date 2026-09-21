@@ -29,3 +29,7 @@ jobs:
       # The registry publishes what server.json says; keep it equal to package.json.
       - name: Versions agree
         run: node scripts/check-version.mjs
+      # The bundle is the one-click install path; catch a broken pack early.
+      - name: Bundle packs
+        if: matrix.node == '22'
+        run: node scripts/build-mcpb.mjs

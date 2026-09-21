@@ -15,3 +15,6 @@ stores.json.*
 
 # built site
 site/_site/
+
+# mcpb build output
+build/
