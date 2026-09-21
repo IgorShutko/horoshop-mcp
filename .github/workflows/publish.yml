@@ -61,7 +61,17 @@ jobs:
           ' "$sha"
           echo "bundle sha256: $sha"
       - run: ./mcp-publisher login github-oidc
-      - run: ./mcp-publisher publish
+      # The registry HEADs the release asset itself and sometimes times out on a
+      # freshly uploaded file, which failed a release that was otherwise fine.
+      - name: Publish (retry while the asset settles)
+        run: |
+          for attempt in 1 2 3 4 5; do
+            if ./mcp-publisher publish; then exit 0; fi
+            echo "attempt $attempt failed, waiting 30s"
+            sleep 30
+          done
+          echo "::error::mcp-publisher failed five times"
+          exit 1
 
   npm:
     needs: bundle
