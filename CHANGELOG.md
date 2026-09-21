@@ -2,7 +2,7 @@
 
 Формат за [Keep a Changelog](https://keepachangelog.com/uk/1.1.0/), версії за [SemVer](https://semver.org/lang/uk/).
 
-## [Не випущено]
+## [0.2.0] - 2026-09-21
 
 ### Додано
 - Пакет у npm: `horoshop-mcp-server`. Встановлення без Git і без збірки на стороні клієнта.

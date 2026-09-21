@@ -77,6 +77,8 @@ Cursor (`~/.cursor/mcp.json`), Claude Desktop (`claude_desktop_config.json`), Wi
 }
 ```
 
+To pin a version, append the tag: `github:IgorShutko/horoshop-mcp#v0.2.0`.
+
 On Windows use `"command": "cmd", "args": ["/c", "npx", "-y", "github:IgorShutko/horoshop-mcp"]`. The first start downloads and builds the package, which takes about 20 seconds. VS Code, Zed, Hermes Agent, Gemini CLI, OpenCode, Goose and the rest have their own formats: see [docs/INSTALL.md](docs/INSTALL.md), which also covers a regular clone-and-build install and client timeouts.
 
 **5. Try it.** Ask your agent:
