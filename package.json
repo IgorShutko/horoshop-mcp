@@ -53,7 +53,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.13.0",
-    "node-html-parser": "^7.1.0",
+    "node-html-parser": "^9.0.4",
     "zod": "^3.23.8"
   },
   "devDependencies": {
