@@ -7,6 +7,7 @@
 [![Node.js](https://img.shields.io/badge/node-%E2%89%A518-5FA04E)](https://nodejs.org/)
 [![MCP](https://img.shields.io/badge/MCP-stdio-7C3AED)](https://modelcontextprotocol.io/)
 [![Tools](https://img.shields.io/badge/tools-118-0A7CBF)](docs/TOOLS.md)
+[![MCP Registry](https://img.shields.io/badge/MCP%20registry-io.github.IgorShutko%2Fhoroshop--mcp-0A7CBF)](https://registry.modelcontextprotocol.io/v0/servers?search=horoshop)
 
 **Horoshop MCP** (`horoshop-mcp`) is a free, open-source [MCP](https://modelcontextprotocol.io/) server that connects AI agents such as Claude, Cursor, Codex and Hermes Agent to online stores built on [Horoshop](https://horoshop.ua/), the Ukrainian e-commerce platform. It runs on your computer, works with several stores at once and gives the agent 118 tools for the catalog, orders, SEO, redirects, marketplace feeds, design and store settings.
 

@@ -79,6 +79,7 @@ const T = {
       ["22", "ШІ-клієнти з готовим конфігом"],
     ],
     installLabel: "Один рядок у вашому ШІ-клієнті",
+    bundleNote: "Користуєтесь Claude Desktop? Завантажте файл <a href=\"https://github.com/IgorShutko/horoshop-mcp/releases/latest\">horoshop-mcp.mcpb</a> і відкрийте його: сервер поставиться сам, термінал не потрібен.",
     copy: "Копіювати",
     copied: "Скопійовано",
     ask: "Постав SEO-заголовок і опис категорії «Кросівки» українською та російською. Спершу покажи план.",
@@ -147,6 +148,7 @@ const T = {
       ["22", "ИИ-клиента с готовым конфигом"],
     ],
     installLabel: "Одна строка в вашем ИИ-клиенте",
+    bundleNote: "Пользуетесь Claude Desktop? Скачайте файл <a href=\"https://github.com/IgorShutko/horoshop-mcp/releases/latest\">horoshop-mcp.mcpb</a> и откройте его: сервер поставится сам, терминал не нужен.",
     copy: "Копировать",
     copied: "Скопировано",
     ask: "Задай SEO-заголовок и описание категории «Кроссовки» на украинском и русском. Сначала покажи план.",
@@ -215,6 +217,7 @@ const T = {
       ["22", "AI clients with a ready config"],
     ],
     installLabel: "One line in your AI client",
+    bundleNote: "On Claude Desktop? Download <a href=\"https://github.com/IgorShutko/horoshop-mcp/releases/latest\">horoshop-mcp.mcpb</a> and open it: the server installs itself, no terminal needed.",
     copy: "Copy",
     copied: "Copied",
     ask: "Set the SEO title and description for the Sneakers category in Ukrainian and Russian. Show me the plan first.",
@@ -392,6 +395,7 @@ __CSS__
         <code id="cmd">${esc(INSTALL)}</code>
         <button class="copy" type="button" data-copy="${esc(INSTALL)}" data-done-label="${esc(t.copied)}">${esc(t.copy)}</button>
       </div>
+      <p class="bundle">${t.bundleNote}</p>
     </div>
   </div>
 

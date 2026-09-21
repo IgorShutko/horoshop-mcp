@@ -190,6 +190,22 @@ h1 em { font-style: normal; color: var(--chalk); }
   transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
 
+.bundle {
+  margin: 14px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 58ch;
+}
+
+.bundle a {
+  color: var(--chalk);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(207, 224, 201, 0.28);
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.bundle a:hover, .bundle a:focus-visible { color: var(--text); border-color: var(--text); }
+
 .copy:hover, .copy:focus-visible { color: var(--ink); background: var(--chalk); border-color: var(--chalk); }
 .copy[data-done="1"] { color: var(--ink); background: var(--chalk); border-color: var(--chalk); }
 
