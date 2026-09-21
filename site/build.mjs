@@ -68,7 +68,7 @@ const LANGS = [
 const T = {
   uk: {
     title: "Хорошоп MCP - ШІ-агент керує вашим магазином на Хорошопі",
-    desc: "Безкоштовний відкритий MCP-сервер: підключає Claude, Cursor, Codex та інших ШІ-агентів до магазину на Хорошопі. 118 інструментів, кілька магазинів в одному сервері, запис лише після вашого підтвердження.",
+    desc: "Відкритий MCP-сервер: підключає Claude, Cursor, Codex та інших ШІ-агентів до магазину на Хорошопі. 118 інструментів, запис лише після підтвердження.",
     nav: { docs: "Документація", tools: "Інструменти", github: "GitHub" },
     h1a: "Агент робить те,",
     h1b: "що ви б робили руками",
@@ -136,7 +136,7 @@ const T = {
   },
   ru: {
     title: "Хорошоп MCP - ИИ-агент управляет вашим магазином на Хорошопе",
-    desc: "Бесплатный открытый MCP-сервер: подключает Claude, Cursor, Codex и других ИИ-агентов к магазину на Хорошопе. 118 инструментов, несколько магазинов в одном сервере, запись только после вашего подтверждения.",
+    desc: "Открытый MCP-сервер: подключает Claude, Cursor, Codex и других ИИ-агентов к магазину на Хорошопе. 118 инструментов, запись только после подтверждения.",
     nav: { docs: "Документация", tools: "Инструменты", github: "GitHub" },
     h1a: "Агент делает то,",
     h1b: "что вы делали бы руками",
@@ -204,7 +204,7 @@ const T = {
   },
   en: {
     title: "Horoshop MCP - let an AI agent run your Horoshop store",
-    desc: "Free open-source MCP server connecting Claude, Cursor, Codex and other AI agents to a Horoshop store. 118 tools, many stores in one server, writes only after you confirm.",
+    desc: "Open-source MCP server connecting Claude, Cursor, Codex and other AI agents to a Horoshop store. 118 tools, writes only after you confirm.",
     nav: { docs: "Docs", tools: "Tools", github: "GitHub" },
     h1a: "Your agent does the work",
     h1b: "you would do by hand",
@@ -467,13 +467,30 @@ __CSS__
 (function () {
   var copy = document.querySelector(".copy");
   if (copy) {
+    var idle = copy.textContent;
+    var flash = function () {
+      copy.textContent = copy.dataset.doneLabel;
+      copy.dataset.done = "1";
+      setTimeout(function () { copy.textContent = idle; copy.removeAttribute("data-done"); }, 1600);
+    };
+    // The clipboard API is refused in some contexts; select the command instead
+    // of leaving a button that looks like it worked and did nothing.
+    var selectCommand = function () {
+      var code = document.getElementById("cmd");
+      if (!code) return;
+      var range = document.createRange();
+      range.selectNodeContents(code);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    };
     copy.addEventListener("click", function () {
-      navigator.clipboard.writeText(copy.dataset.copy).then(function () {
-        var was = copy.textContent;
-        copy.textContent = copy.dataset.doneLabel;
-        copy.dataset.done = "1";
-        setTimeout(function () { copy.textContent = was; copy.removeAttribute("data-done"); }, 1600);
-      });
+      var text = copy.dataset.copy;
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(flash, selectCommand);
+      } else {
+        selectCommand();
+      }
     });
   }
   var plan = document.querySelector(".plan");
