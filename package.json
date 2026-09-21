@@ -59,5 +59,6 @@
   "devDependencies": {
     "@types/node": "^22.10.0",
     "typescript": "^5.6.3"
-  }
+  },
+  "mcpName": "io.github.igorshutko/horoshop-mcp"
 }

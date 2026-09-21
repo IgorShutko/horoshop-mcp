@@ -26,3 +26,6 @@ jobs:
       - run: npm test
       # The tool reference is generated from `tools/list`; fail if it drifted.
       - run: npm run docs:tools:check
+      # The registry publishes what server.json says; keep it equal to package.json.
+      - name: Versions agree
+        run: node scripts/check-version.mjs

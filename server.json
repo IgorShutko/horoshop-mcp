@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.igorshutko/horoshop-mcp",
   "title": "Horoshop MCP",
-  "description": "Unofficial MCP server for Horoshop (Хорошоп) stores: catalog, orders, SEO, redirects, marketplace feeds, design and store settings through the public API, the admin panel and the storefront. 118 tools, many stores in one server.",
+  "description": "Unofficial server for Horoshop (Хорошоп) stores: catalog, orders, SEO, feeds, admin. 118 tools.",
   "version": "0.2.0",
   "websiteUrl": "https://igorshutko.github.io/horoshop-mcp/",
   "repository": {
@@ -15,7 +15,9 @@
       "identifier": "horoshop-mcp-server",
       "version": "0.2.0",
       "runtimeHint": "npx",
-      "transport": { "type": "stdio" },
+      "transport": {
+        "type": "stdio"
+      },
       "environmentVariables": [
         {
           "name": "HOROSHOP_STORES_FILE",

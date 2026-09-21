@@ -366,13 +366,13 @@ footer {
   font-size: 14px;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 32px;
+  gap: 8px 32px;
   align-items: baseline;
 }
 
 footer a { color: var(--muted); text-decoration: none; }
 footer a:hover, footer a:focus-visible { color: var(--text); }
-footer .sig { margin-inline-start: auto; }
+
 
 :focus-visible { outline: 2px solid var(--chalk); outline-offset: 3px; }
 
