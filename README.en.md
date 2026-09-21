@@ -49,7 +49,11 @@ Documentation: [docs/INSTALL.md](docs/INSTALL.md) (setup for 22 clients) · [doc
 }
 ```
 
-**4. Connect your client.** No clone needed: the client starts the server with `npx`.
+**4. Connect your client.** No clone needed.
+
+*Claude Desktop, the easy path:* download `horoshop-mcp.mcpb` from the [latest release](https://github.com/IgorShutko/horoshop-mcp/releases/latest) and open it. Claude Desktop installs the server itself and asks where your `stores.json` lives. No terminal.
+
+*Every other client* starts the server with `npx`.
 
 Claude Code:
 

@@ -1,42 +1,41 @@
 name: Publish
 
-# Runs on a published GitHub release: pushes the package to npm, then registers
-# that version in the official MCP registry. Needs one repository secret:
-# NPM_TOKEN (npm > Access Tokens > Granular, publish rights on horoshop-mcp-server).
+# On a published release: build the .mcpb bundle, attach it to the release, then
+# register that version in the official MCP registry (GitHub OIDC - no secret).
+# The npm job is optional: it runs only when an NPM_TOKEN secret exists, because
+# the package name is published from an account this workflow does not own yet.
 on:
   release:
     types: [published]
   workflow_dispatch:
 
 jobs:
-  npm:
+  bundle:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      id-token: write # npm provenance
+      contents: write # upload the asset to the release
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
           node-version: "22"
-          registry-url: https://registry.npmjs.org
           cache: npm
       - run: npm ci
       - run: npm test
-      - name: Check the publish token is configured
-        run: |
-          if [ -z "${NODE_AUTH_TOKEN}" ]; then
-            echo "::error::NPM_TOKEN secret is missing. Add it in Settings > Secrets and variables > Actions."
-            exit 1
-          fi
+      - run: node scripts/check-version.mjs
+      - run: node scripts/build-mcpb.mjs
+      - name: Attach the bundle to the release
+        if: github.event_name == 'release'
+        run: gh release upload "${{ github.event.release.tag_name }}" build/horoshop-mcp.mcpb --clobber
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: horoshop-mcp-mcpb
+          path: build/horoshop-mcp.mcpb
 
   registry:
-    needs: npm
+    needs: bundle
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -49,3 +48,27 @@ jobs:
             | tar xz mcp-publisher
       - run: ./mcp-publisher login github-oidc
       - run: ./mcp-publisher publish
+
+  npm:
+    needs: bundle
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # npm provenance
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - run: npm ci
+      - name: Publish if a token is configured
+        run: |
+          if [ -z "${NODE_AUTH_TOKEN}" ]; then
+            echo "::notice::NPM_TOKEN is not set - skipping npm. The bundle and the registry entry are published either way."
+            exit 0
+          fi
+          npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

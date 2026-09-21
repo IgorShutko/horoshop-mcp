@@ -3,7 +3,7 @@
   "name": "io.github.igorshutko/horoshop-mcp",
   "title": "Horoshop MCP",
   "description": "Unofficial server for Horoshop (Хорошоп) stores: catalog, orders, SEO, feeds, admin. 118 tools.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "websiteUrl": "https://igorshutko.github.io/horoshop-mcp/",
   "repository": {
     "url": "https://github.com/IgorShutko/horoshop-mcp",
@@ -11,25 +11,18 @@
   },
   "packages": [
     {
-      "registryType": "npm",
-      "identifier": "horoshop-mcp-server",
-      "version": "0.2.0",
-      "runtimeHint": "npx",
+      "registryType": "mcpb",
+      "identifier": "https://github.com/IgorShutko/horoshop-mcp/releases/download/v0.2.1/horoshop-mcp.mcpb",
+      "version": "0.2.1",
       "transport": {
         "type": "stdio"
       },
       "environmentVariables": [
         {
           "name": "HOROSHOP_STORES_FILE",
-          "description": "Absolute path to a JSON file mapping store name to { baseUrl, login, password }. Preferred over inlining credentials.",
+          "description": "Absolute path to a JSON file mapping store name to { baseUrl, login, password }.",
           "format": "filepath",
-          "isRequired": false
-        },
-        {
-          "name": "HOROSHOP_STORES",
-          "description": "Same mapping inline as a JSON string. Use only when the client cannot read a file.",
-          "isSecret": true,
-          "isRequired": false
+          "isRequired": true
         },
         {
           "name": "HOROSHOP_DEFAULT_STORE",
