@@ -1,6 +1,6 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.igorshutko/horoshop-mcp",
+  "name": "io.github.IgorShutko/horoshop-mcp",
   "title": "Horoshop MCP",
   "description": "Unofficial server for Horoshop (Хорошоп) stores: catalog, orders, SEO, feeds, admin. 118 tools.",
   "version": "0.2.1",
