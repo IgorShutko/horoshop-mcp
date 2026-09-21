@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="uk"><head><meta charset="utf-8"><style>
+@font-face{font-family:Geist;src:url("fonts/geist.woff2") format("woff2");font-weight:100 900}
+*{box-sizing:border-box;margin:0}
+body{width:1280px;height:640px;overflow:hidden;background:#0c0e0c;color:#e9e7e1;
+  font-family:Geist,system-ui,sans-serif;position:relative}
+.bg{position:absolute;inset:0;background:
+  radial-gradient(90% 80% at 6% -12%, rgba(207,224,201,.13), transparent 58%),
+  linear-gradient(180deg,#0f110f 0%,#0c0e0c 46%,#090b09 100%)}
+.grain{position:absolute;inset:0;opacity:.34;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+.frame{position:relative;height:100%;padding:72px 80px 66px;display:flex;flex-direction:column}
+.mark{font-family:Geist;font-weight:700;font-size:23px;letter-spacing:-.01em}
+.mark span{color:#cfe0c9}
+h1{font-family:Geist;font-weight:800;font-size:66px;line-height:1.04;letter-spacing:-.032em;
+  margin-top:auto;max-width:22ch}
+h1 em{font-style:normal;color:#cfe0c9}
+p{margin-top:26px;font-size:25px;line-height:1.4;color:#98a19a;max-width:44ch}
+.row{margin-top:46px;display:flex;gap:56px;align-items:baseline}
+.row div{display:flex;gap:12px;align-items:baseline}
+.row b{font-family:Geist;font-weight:700;font-size:34px;letter-spacing:-.02em}
+.row span{font-size:17px;color:#6e7872}
+.cut{position:absolute;top:0;right:0;width:150px;height:150px;
+  background:linear-gradient(225deg,#1e241f 0 50%,transparent 50%)}
+</style></head>
+<body>
+<div class="bg"></div><div class="grain"></div><div class="cut"></div>
+<div class="frame">
+  <div class="mark">horoshop<span>-mcp</span></div>
+  <h1>Агент робить те, <em>що ви б робили руками</em></h1>
+  <p>Відкритий MCP-сервер для магазинів на Хорошопі</p>
+  <div class="row">
+    <div><b>118</b><span>інструментів</span></div>
+    <div><b>57 із 71</b><span>записів спершу показують план</span></div>
+    <div><b>MIT</b><span>безкоштовно</span></div>
+  </div>
+</div>
+</body></html>

@@ -31,6 +31,8 @@
 - [Author and contacts](#author-and-contacts)
 - [License](#license)
 
+Project page: [igorshutko.github.io/horoshop-mcp](https://igorshutko.github.io/horoshop-mcp/en/)
+
 Documentation: [docs/INSTALL.md](docs/INSTALL.md) (setup for 22 clients) · [docs/TOOLS.md](docs/TOOLS.md) (every tool and parameter) · [docs/INTERNALS.md](docs/INTERNALS.md) (architecture and platform notes).
 
 ## Quick start

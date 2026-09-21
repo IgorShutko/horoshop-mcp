@@ -12,3 +12,6 @@ stores.json.*
 *.bak.*
 .env
 .env.*
+
+# built site
+site/_site/

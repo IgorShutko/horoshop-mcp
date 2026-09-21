@@ -6,6 +6,7 @@ Key facts: Node.js 18+; install with `npx -y horoshop-mcp-server`; 47 read-only 
 
 ## Start here
 
+- [Project page](https://igorshutko.github.io/horoshop-mcp/): one-page overview in Ukrainian, Russian and English, with the tool sections and their counts.
 - [README (Ukrainian, canonical)](https://github.com/IgorShutko/horoshop-mcp/blob/main/README.md): what the server does, quick start, capabilities table, FAQ.
 - [README (English)](https://github.com/IgorShutko/horoshop-mcp/blob/main/README.en.md): same content in English.
 - [README (Russian)](https://github.com/IgorShutko/horoshop-mcp/blob/main/README.ru.md): same content in Russian.
