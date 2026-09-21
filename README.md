@@ -7,6 +7,7 @@
 [![Node.js](https://img.shields.io/badge/node-%E2%89%A518-5FA04E)](https://nodejs.org/)
 [![MCP](https://img.shields.io/badge/MCP-stdio-7C3AED)](https://modelcontextprotocol.io/)
 [![Tools](https://img.shields.io/badge/tools-118-0A7CBF)](docs/TOOLS.md)
+[![MCP Registry](https://img.shields.io/badge/MCP%20registry-io.github.IgorShutko%2Fhoroshop--mcp-0A7CBF)](https://registry.modelcontextprotocol.io/v0/servers?search=horoshop)
 
 **Хорошоп MCP** (`horoshop-mcp`): безкоштовний [MCP](https://modelcontextprotocol.io/)-сервер з відкритим кодом, який підключає ШІ-агентів Claude, Cursor, Codex, Hermes Agent та інших до інтернет-магазину на платформі [Хорошоп](https://horoshop.ua/). Сервер працює на вашому комп'ютері, обслуговує кілька магазинів одночасно і дає агенту 118 інструментів для каталогу, замовлень, SEO, редиректів, фідів маркетплейсів, дизайну та налаштувань магазину.
 
