@@ -1,0 +1,36 @@
+# horoshop-mcp
+
+> Unofficial MCP (Model Context Protocol) server that connects AI agents — Claude, Cursor, Codex, Gemini CLI and others — to online stores on the Ukrainian e-commerce platform Horoshop (Хорошоп). 118 stdio tools covering the documented public API, the admin panel and the storefront cart. One local process serves many stores; each tool takes a `store` argument. MIT licensed, runs on the user's own machine, credentials stay in a local file.
+
+Key facts: Node.js 18+; install with `npx -y horoshop-mcp-server`; 47 read-only and 71 write tools; 57 of the write tools preview changes until `dryRun:false` is passed; not affiliated with or supported by Horoshop; admin-panel tools use internal endpoints that can change without notice.
+
+## Start here
+
+- [Project page](https://igorshutko.github.io/horoshop-mcp/): one-page overview in Ukrainian, Russian and English, with the tool sections and their counts.
+- [README (Ukrainian, canonical)](https://github.com/IgorShutko/horoshop-mcp/blob/main/README.md): what the server does, quick start, capabilities table, FAQ.
+- [README (English)](https://github.com/IgorShutko/horoshop-mcp/blob/main/README.en.md): same content in English.
+- [README (Russian)](https://github.com/IgorShutko/horoshop-mcp/blob/main/README.ru.md): same content in Russian.
+
+## Tools
+
+- [Tool index](https://github.com/IgorShutko/horoshop-mcp/blob/main/docs/TOOLS.md): all 118 tools in one table, grouped into 17 sections, with access level.
+- [Machine index (JSON)](https://raw.githubusercontent.com/IgorShutko/horoshop-mcp/main/docs/tools.json): one compact record per tool — name, section, access, dry-run support, call signature, link to the full page. Read this instead of the markdown when choosing a tool.
+- [Per-section reference](https://github.com/IgorShutko/horoshop-mcp/tree/main/docs/tools): full descriptions and parameter tables, one page per section.
+
+## Install and operate
+
+- [Install guide (English)](https://github.com/IgorShutko/horoshop-mcp/blob/main/docs/INSTALL.md): configuration for 22 MCP clients, credentials, timeouts, troubleshooting.
+- [Install guide (Ukrainian)](https://github.com/IgorShutko/horoshop-mcp/blob/main/docs/INSTALL.uk.md)
+- [Install guide (Russian)](https://github.com/IgorShutko/horoshop-mcp/blob/main/docs/INSTALL.ru.md)
+- [Security model](https://github.com/IgorShutko/horoshop-mcp/blob/main/SECURITY.md): where credentials live, what is masked in responses, how to report a vulnerability.
+
+## Internals
+
+- [How it works](https://github.com/IgorShutko/horoshop-mcp/blob/main/docs/INTERNALS.md): session handling, admin form parsing, platform quirks, size limits.
+- [Contributing](https://github.com/IgorShutko/horoshop-mcp/blob/main/CONTRIBUTING.md): build, test, doc generation, tool conventions.
+- [AGENTS.md](https://github.com/IgorShutko/horoshop-mcp/blob/main/AGENTS.md): invariants for agents changing this codebase.
+
+## Optional
+
+- [Changelog](https://github.com/IgorShutko/horoshop-mcp/blob/main/CHANGELOG.md)
+- [MCP registry manifest](https://github.com/IgorShutko/horoshop-mcp/blob/main/server.json)

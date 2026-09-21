@@ -2,6 +2,12 @@
 
 [Українська](README.md) · [Русский](README.ru.md) · **English**
 
+[![CI](https://github.com/IgorShutko/horoshop-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/IgorShutko/horoshop-mcp/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-black)](LICENSE)
+[![Node.js](https://img.shields.io/badge/node-%E2%89%A518-5FA04E)](https://nodejs.org/)
+[![MCP](https://img.shields.io/badge/MCP-stdio-7C3AED)](https://modelcontextprotocol.io/)
+[![Tools](https://img.shields.io/badge/tools-118-0A7CBF)](docs/TOOLS.md)
+
 **Horoshop MCP** (`horoshop-mcp`) is a free, open-source [MCP](https://modelcontextprotocol.io/) server that connects AI agents such as Claude, Cursor, Codex and Hermes Agent to online stores built on [Horoshop](https://horoshop.ua/), the Ukrainian e-commerce platform. It runs on your computer, works with several stores at once and gives the agent 118 tools for the catalog, orders, SEO, redirects, marketplace feeds, design and store settings.
 
 > **Unofficial project.** Horoshop MCP is not made, endorsed or supported by Horoshop. The admin-panel tools use internal, undocumented endpoints of the control panel, which Horoshop may change without notice. Try new workflows on a test store before running them on a live one.
@@ -24,6 +30,8 @@
 - [Development](#development)
 - [Author and contacts](#author-and-contacts)
 - [License](#license)
+
+Project page: [igorshutko.github.io/horoshop-mcp](https://igorshutko.github.io/horoshop-mcp/en/)
 
 Documentation: [docs/INSTALL.md](docs/INSTALL.md) (setup for 22 clients) · [docs/TOOLS.md](docs/TOOLS.md) (every tool and parameter) · [docs/INTERNALS.md](docs/INTERNALS.md) (architecture and platform notes).
 
@@ -100,7 +108,7 @@ On Windows use `"command": "cmd", "args": ["/c", "npx", "-y", "github:IgorShutko
 | Admin: design and localization | 8 | theme settings, custom CSS, languages, interface translations |
 | Admin: store settings, marketing, fiscal receipts | 14 | contacts and store info, checkout options, tracking codes (GTM, Pixel, GA4), coupons, Checkbox receipts |
 
-Every tool, its access level and all parameters: [docs/TOOLS.md](docs/TOOLS.md).
+Every tool, its access level and all parameters: [docs/TOOLS.md](docs/TOOLS.md). Agents are better served by [`docs/tools.json`](docs/tools.json): the same list without the prose, one compact record per tool.
 
 ## Configuration
 
@@ -160,10 +168,25 @@ The full list with details is in [docs/INTERNALS.md](docs/INTERNALS.md#platform-
 - The server talks only to the stores you configure, to the Horoshop image-upload service that your control panel points to during image imports, and to image URLs you ask it to upload. There is no telemetry.
 - API tokens and control-panel sessions live in memory only.
 - When reporting a bug, do not paste real store data, order details or credentials into the issue.
+- The security model, what gets masked in responses and where to report a vulnerability: [SECURITY.md](SECURITY.md).
 
 ## How it works
 
 The server combines three channels to a store:
+
+```mermaid
+flowchart TD
+  AI["AI client<br/>Claude · Cursor · Codex · Gemini CLI"] -->|"MCP, stdio"| S["horoshop-mcp<br/>118 tools"]
+  S --> G{"Is it a write?"}
+  G -->|"read"| CH["Three channels into the store"]
+  G -->|"write: plan first,<br/>applied only with dryRun:false"| CH
+  CH --> P["Public API<br/>catalog, orders, customers"]
+  CH --> A["Admin panel<br/>SEO, feeds, design, settings"]
+  CH --> V["Storefront<br/>cart and checkout"]
+  P --> ST["Your Horoshop store<br/>the store argument picks which one"]
+  A --> ST
+  V --> ST
+```
 
 1. **Public API** (`/api/<function>/`): token authentication, cached per store and renewed transparently. Used for catalog, orders, users, reference data, B2B and webhooks.
 2. **Control panel**: a session from `/core-api/admin/security/login`, then the legacy admin screens. The admin is a uniform machine keyed on `handler` (entity type): lists, edit forms, save endpoints. A registry of these entity types lets a small generic core reach almost every section, with named tools for the common ones. Writes read the whole form, change only the requested fields and replay the rest, so untouched fields are preserved.
@@ -216,7 +239,9 @@ MCP clients start the server once, so restart your client after rebuilding. `hor
 
 `evaluation/horoshop_eval.xml` holds a set of read-only questions for checking that a model can complete real tasks through the server. The answers depend on the connected store, so fill them in against your own test store.
 
-Issues and pull requests are welcome. Keep real store data out of issues, logs and test fixtures.
+`npm test` boots the built server and checks what every client depends on: all 118 tools present, the stdout channel clean, every tool routable to a store. CI runs the same commands on Node 18 and 22.
+
+Issues and pull requests are welcome: [CONTRIBUTING.md](CONTRIBUTING.md) for the rules, [AGENTS.md](AGENTS.md) for AI agents changing this code, [CHANGELOG.md](CHANGELOG.md) for what changed between versions. Keep real store data out of issues, logs and test fixtures.
 
 ## Author and contacts
 

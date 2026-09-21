@@ -68,7 +68,7 @@ function buildIdOf(mtimeMs: number): string {
   return mtimeMs > 0 ? Math.round(mtimeMs).toString(36) : "unknown";
 }
 
-const VERSION = readVersion();
+export const VERSION = readVersion();
 // Frozen at process start: the build this running process was loaded from.
 const PROCESS_MTIME = newestDistMtime();
 const PROCESS_BUILT_AT = PROCESS_MTIME > 0 ? new Date(PROCESS_MTIME).toISOString() : null;

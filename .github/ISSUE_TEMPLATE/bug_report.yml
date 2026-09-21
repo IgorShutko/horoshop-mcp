@@ -1,0 +1,49 @@
+name: Помилка в роботі сервера
+description: Інструмент падає, повертає не те, або ШІ-клієнт не бачить сервер
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Перед тим як надсилати: приберіть з логів логін, пароль, `auth_token` і адресу адмінки.
+        Вставляйте лише той фрагмент, що стосується помилки.
+  - type: input
+    id: version
+    attributes:
+      label: Версія сервера
+      description: Рядок із запуску, напр. `[horoshop-mcp] build ab12cd34 (v0.1.0)`, або тег із якого ставили
+      placeholder: v0.1.0
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: ШІ-клієнт і Node.js
+      placeholder: Claude Code 2.x, Node 22.4.0, macOS 15
+    validations:
+      required: true
+  - type: input
+    id: tool
+    attributes:
+      label: Інструмент
+      description: Ім'я інструмента, на якому виникає помилка
+      placeholder: horoshop_catalog_export
+  - type: textarea
+    id: steps
+    attributes:
+      label: Що робили
+      description: Запит до агента або аргументи виклику - без доступів
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Що очікували і що сталося
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Лог сервера
+      description: Рядки з stderr клієнта. Пароль і токен заберіть.
+      render: shell
