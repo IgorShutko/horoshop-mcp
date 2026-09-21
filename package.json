@@ -52,7 +52,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.13.0",
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "node-html-parser": "^7.1.0",
     "zod": "^3.23.8"
   },
