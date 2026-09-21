@@ -3,7 +3,7 @@
   "name": "io.github.IgorShutko/horoshop-mcp",
   "title": "Horoshop MCP",
   "description": "Unofficial server for Horoshop (Хорошоп) stores: catalog, orders, SEO, feeds, admin. 118 tools.",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "websiteUrl": "https://igorshutko.github.io/horoshop-mcp/",
   "repository": {
     "url": "https://github.com/IgorShutko/horoshop-mcp",
@@ -12,8 +12,8 @@
   "packages": [
     {
       "registryType": "mcpb",
-      "identifier": "https://github.com/IgorShutko/horoshop-mcp/releases/download/v0.2.1/horoshop-mcp.mcpb",
-      "version": "0.2.1",
+      "identifier": "https://github.com/IgorShutko/horoshop-mcp/releases/download/v0.3.0/horoshop-mcp.mcpb",
+      "version": "0.3.0",
       "transport": {
         "type": "stdio"
       },
