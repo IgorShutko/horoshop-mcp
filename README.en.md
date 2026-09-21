@@ -22,6 +22,7 @@
 
 - [Quick start](#quick-start)
 - [What it can do](#what-it-can-do)
+- [Ready-made scenarios](#ready-made-scenarios)
 - [Configuration](#configuration)
 - [How writes are protected](#how-writes-are-protected)
 - [Known limitations](#known-limitations)
@@ -116,6 +117,22 @@ On Windows use `"command": "cmd", "args": ["/c", "npx", "-y", "github:IgorShutko
 | Admin: store settings, marketing, fiscal receipts | 14 | contacts and store info, checkout options, tracking codes (GTM, Pixel, GA4), coupons, Checkbox receipts |
 
 Every tool, its access level and all parameters: [docs/TOOLS.md](docs/TOOLS.md). Agents are better served by [`docs/tools.json`](docs/tools.json): the same list without the prose, one compact record per tool.
+
+## Ready-made scenarios
+
+So nobody has to phrase the task from scratch, the server also exposes seven prompts. The client lists them in its own menu - the "+" menu in Claude Desktop, `/mcp` in Claude Code. You pick one, fill in a field or two, and the agent follows the sequence the prompt spells out. The prompts are written in Ukrainian, for the shop owner reading them.
+
+| Scenario | What it does |
+|---|---|
+| Store health | Credentials, sitemap, robots, feeds and sales. Read-only. |
+| Category SEO | Title, description and h1 in two languages: plan first, write after confirmation. |
+| Products without photos | In-stock ones first: those are losing sales right now. |
+| Orders digest | Total, statuses, UTM sources, most frequent products. |
+| Marketplace feeds | What is enabled, whether the URLs are live, where availability, price or categories are unmapped. |
+| Bulk 301 redirects | Loop and duplicate checks, then bulk creation. |
+| Price change with rollback | Guard rails, a warning on large moves, and the parameters to put prices back. |
+
+They live in [`src/prompts.ts`](src/prompts.ts) and deliberately name the tools and the order of steps: the model does not guess how Horoshop works, it follows the path this project already proved.
 
 ## Configuration
 

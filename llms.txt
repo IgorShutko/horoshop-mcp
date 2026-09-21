@@ -2,7 +2,7 @@
 
 > Unofficial MCP (Model Context Protocol) server that connects AI agents — Claude, Cursor, Codex, Gemini CLI and others — to online stores on the Ukrainian e-commerce platform Horoshop (Хорошоп). 118 stdio tools covering the documented public API, the admin panel and the storefront cart. One local process serves many stores; each tool takes a `store` argument. MIT licensed, runs on the user's own machine, credentials stay in a local file.
 
-Key facts: Node.js 18+; install with `npx -y horoshop-mcp-server`; 47 read-only and 71 write tools; 57 of the write tools preview changes until `dryRun:false` is passed; not affiliated with or supported by Horoshop; admin-panel tools use internal endpoints that can change without notice.
+Key facts: seven ready-made scenarios (MCP prompts) that clients list in their own menu; Node.js 18+; install with `npx -y horoshop-mcp-server`; 47 read-only and 71 write tools; 57 of the write tools preview changes until `dryRun:false` is passed; not affiliated with or supported by Horoshop; admin-panel tools use internal endpoints that can change without notice.
 
 ## Start here
 
